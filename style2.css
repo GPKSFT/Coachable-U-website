@@ -1,0 +1,245 @@
+body {
+  font-family: 'Arial', sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  background-color: black;
+  color: white;
+}
+
+.container {
+  max-width: 600px;
+  margin: 40px auto;
+  background-color: #333;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+h1, h2 {
+  color: #fff;
+}
+
+label {
+  font-size: 1.2em;
+  color: #ddd;
+}
+
+input {
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: none;
+  width: calc(100% - 22px);
+  box-sizing: border-box;
+  background-color: black;
+  color: white;
+  border: 1px solid #555;
+}
+
+input::placeholder {
+  color: #777;
+}
+
+input:focus {
+  border-color: #007BFF;
+  background-color: #222;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007BFF;
+  color: white;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+#calendar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.day {
+  border: 2px solid #007BFF;
+  padding: 15px;
+  margin: 5px;
+  width: calc(14% - 10px);
+  cursor: pointer;
+  background-color: #444;
+  color: white;
+  border-radius: 10px;
+}
+
+.day.booked {
+  background-color: #ff4444;
+}
+
+.day:hover {
+  background-color: #007BFF;
+  color: white;
+  transform: scale(1.05);
+}
+
+.hidden {
+  display: none;
+}
+
+#timeSlots {
+  margin-top: 20px;
+}
+
+#timeList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0;
+  list-style: none;
+}
+
+#timeList li {
+  list-style: none;
+  padding: 15px;
+  margin: 5px;
+  background-color: #007BFF;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  min-width: 60px;
+  text-align: center;
+}
+
+#timeList li.booked {
+  background-color: #ff4444;
+  cursor: not-allowed;
+}
+
+#timeList li:hover:not(.booked) {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.back-button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  color: white;
+  background-color: #444;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.back-button:hover {
+  background-color: #007BFF;
+}
+
+nav {
+  display: flex;
+  padding: 2% 3%;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+nav img {
+  width: 150px;
+}
+
+.nav-links {
+  flex: 1;
+  text-align: right;
+}
+
+.nav-links ul {
+  display: inline-block;
+}
+
+.nav-links ul li {
+  list-style: none;
+  display: inline-block;
+  padding: 4px 7px;
+  position: relative;
+}
+
+.nav-links ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 13px;
+}
+
+.nav-links ul li::after {
+  content: "";
+  width: 0%;
+  height: 2px;
+  background: #f44336;
+  display: block;
+  margin: auto;
+  transition: 0.5s;
+}
+
+.nav-links ul li:hover::after {
+  width: 100%;
+}
+
+.button-container {
+  text-align: center;
+  margin: 50px 0;
+}
+
+.book-now-btn {
+  display: inline-block;
+  background-color: black;
+  color: white;
+  border: 2px solid white;
+  padding: 15px 30px;
+  font-size: 18px;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s, transform 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.book-now-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300%;
+  height: 300%;
+  background-color: black;
+  transition: width 0.4s, height 0.4s, top 0.4s, left 0.4s;
+  z-index: 0;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+}
+
+.book-now-btn:hover::before {
+  width: 0;
+  height: 0;
+  top: 50%;
+  left: 50%;
+}
+
+.book-now-btn:hover {
+  color: black;
+  background-color: white;
+  transform: scale(1.05);
+  border-color: black;
+}
+
+.book-now-btn span {
+  position: relative;
+  z-index: 1;
+}

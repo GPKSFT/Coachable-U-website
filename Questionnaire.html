@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionnaire</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #000;
+            color: #fff;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .contact-container {
+            background: #222;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+            width: 90%;
+            max-width: 600px;
+            margin: 20px auto;
+            position: relative;
+            overflow: hidden; /* Hide confetti overflow */
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 1rem;
+            color: #ffcc00; /* Vibrant header color */
+        }
+
+        .question {
+            margin-bottom: 20px;
+        }
+
+        .question label {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .question div {
+            margin: 5px 0; /* Added margin for spacing between options */
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .navigation button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #ff5733; /* Vibrant button color */
+            color: #fff;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .navigation button:hover {
+            background-color: #c70039; /* Darker hover color */
+            box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .navigation button:active {
+            transform: translateY(2px);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Animation Styles */
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Slideshow Styles */
+        .slideshow {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.5rem; /* Increased font size */
+            font-weight: bold;
+            animation: slideIn 0.5s forwards;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Score Message Styles */
+        #userScore {
+            font-size: 2rem;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 20px;
+            display: none; /* Hide initially */
+        }
+
+        #scoreResult {
+            margin-top: 10px;
+            font-size: 1.5rem;
+            text-align: center;
+            display: none; /* Hide initially */
+        }
+
+        #confirmationMessage {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-align: center;
+            display: none;
+            color: #28a745; /* Green for confirmation */
+        }
+
+        /* Confetti styles */
+        .confetti {
+            position: absolute;
+            pointer-events: none;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+            z-index: 10;
+        }
+
+        .confetti-piece {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #ff5733; /* Vibrant confetti color */
+            opacity: 0.8;
+            animation: fall 3s infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+        .nav-links {
+          flex: 1;
+          text-align: right;
+        }
+
+        .nav-links ul {
+          display: inline-block;
+        }
+
+        .nav-links ul li {
+          list-style: none;
+          display: inline-block;
+          padding: 4px 7px;
+          position: relative;
+        }
+
+        .nav-links ul li a {
+          color: #fff;
+          text-decoration: none;
+          font-size: 13px;
+        }
+
+        .nav-links ul li::after {
+          content: "";
+          width: 0%;
+          height: 2px;
+          background: #f44336;
+          display: block;
+          margin: auto;
+          transition: width 0.5s ease;
+        }
+
+        .nav-links ul li:hover::after {
+          width: 100%;
+        }
+
+        .header-content {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <section class="header">
+        <nav>
+          <a href="index.html"><img src="Logo.jpg" alt="Logo"></a>
+          <div class="nav-links" id="navLinks">
+            <i class="fa fa-times" onclick="hideMenu()"></i>
+            <ul>
+              <li><a href="index.html">HOME</a></li>
+              <li><a href="About.html">ABOUT</a></li>
+              <li><a href="Contact.html">CONTACT</a></li>
+
+            </ul>
+          </div>
+    <div class="contact-container">
+        <header>
+            <h1>Coachable U</h1>
+        </header>
+        <div class="container">
+            <form id="questionnaireForm" action="https://formspree.io/f/xqkrvpww" method="POST" novalidate>
+                <div class="question">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="question">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="question">
+                    <label>1. Do you feel comfortable communicating with your team?</label>
+                    <div>
+                        <input type="radio" name="question1" value="Yes" required> Yes
+                    </div>
+                    <div>
+                        <input type="radio" name="question1" value="No"> No
+                    </div>
+                    <div>
+                        <input type="radio" name="question1" value="Not Sure"> Not Sure
+                    </div>
+                </div>
+                <div class="question">
+                    <label>2. Are you open to receiving feedback?</label>
+                    <div>
+                        <input type="radio" name="question2" value="Yes" required> Yes
+                    </div>
+                    <div>
+                        <input type="radio" name="question2" value="No"> No
+                    </div>
+                    <div>
+                        <input type="radio" name="question2" value="Not Sure"> Not Sure
+                    </div>
+                </div>
+                <div class="question">
+                    <label>3. Do you proactively seek help when needed?</label>
+                    <div>
+                        <input type="radio" name="question3" value="Yes" required> Yes
+                    </div>
+                    <div>
+                        <input type="radio" name="question3" value="No"> No
+                    </div>
+                    <div>
+                        <input type="radio" name="question3" value="Not Sure"> Not Sure
+                    </div>
+                </div>
+                <div class="question">
+                    <label>4. Are you able to accept constructive criticism?</label>
+                    <div>
+                        <input type="radio" name="question4" value="Yes" required> Yes
+                    </div>
+                    <div>
+                        <input type="radio" name="question4" value="No"> No
+                    </div>
+                    <div>
+                        <input type="radio" name="question4" value="Not Sure"> Not Sure
+                    </div>
+                </div>
+                <div class="question">
+                    <label>5. Do you believe in lifelong learning?</label>
+                    <div>
+                        <input type="radio" name="question5" value="Yes" required> Yes
+                    </div>
+                    <div>
+                        <input type="radio" name="question5" value="No"> No
+                    </div>
+                    <div>
+                        <input type="radio" name="question5" value="Not Sure"> Not Sure
+                    </div>
+                </div>
+                <div class="question">
+                    <label>6. Do you often reflect on your own performance?</label>
+                    <div>
+                        <input type="radio" name="question6" value="Yes" required> Yes
+                    </div>
+                    <div>
+                        <input type="radio" name="question6" value="No"> No
+                    </div>
+                    <div>
+                        <input type="radio" name="question6" value="Not Sure"> Not Sure
+                    </div>
+                </div>
+                <div class="question">
+                    <label>7. Are you willing to step out of your comfort zone?</label>
+                    <div>
+                        <input type="radio" name="question7" value="Yes" required> Yes
+                    </div>
+                    <div>
+                        <input type="radio" name="question7" value="No"> No
+                    </div>
+                    <div>
+                        <input type="radio" name="question7" value="Not Sure"> Not Sure
+                    </div>
+                </div>
+                <div class="question">
+                    <label>8. Do you consider yourself adaptable to change?</label>
+                    <div>
+                        <input type="radio" name="question8" value="Yes" required> Yes
+                    </div>
+                    <div>
+                        <input type="radio" name="question8" value="No"> No
+                    </div>
+                    <div>
+                        <input type="radio" name="question8" value="Not Sure"> Not Sure
+                    </div>
+                </div>
+                <div class="question">
+                    <label>9. Do you actively engage in setting personal goals?</label>
+                    <div>
+                        <input type="radio" name="question9" value="Yes" required> Yes
+                    </div>
+                    <div>
+                        <input type="radio" name="question9" value="No"> No
+                    </div>
+                    <div>
+                        <input type="radio" name="question9" value="Not Sure"> Not Sure
+                    </div>
+                </div>
+                <div class="question">
+                    <label>10. Do you seek out new challenges in your role?</label>
+                    <div>
+                        <input type="radio" name="question10" value="Yes" required> Yes
+                    </div>
+                    <div>
+                        <input type="radio" name="question10" value="No"> No
+                    </div>
+                    <div>
+                        <input type="radio" name="question10" value="Not Sure"> Not Sure
+                    </div>
+                </div>
+                <div class="question">
+                    <label>11. Do you ask for feedback from others regularly?</label>
+                    <div>
+                        <input type="radio" name="question11" value="Yes" required> Yes
+                    </div>
+                    <div>
+                        <input type="radio" name="question11" value="No"> No
+                    </div>
+                    <div>
+                        <input type="radio" name="question11" value="Not Sure"> Not Sure
+                    </div>
+                </div>
+                <div class="question">
+                    <label>12. Are you open to trying new methods to improve your work?</label>
+                    <div>
+                        <input type="radio" name="question12" value="Yes" required> Yes
+                    </div>
+                    <div>
+                        <input type="radio" name="question12" value="No"> No
+                    </div>
+                    <div>
+                        <input type="radio" name="question12" value="Not Sure"> Not Sure
+                    </div>
+                </div>
+                <div class="question">
+                    <label>13. Do you believe you can learn from your mistakes?</label>
+                    <div>
+                        <input type="radio" name="question13" value="Yes" required> Yes
+                    </div>
+                    <div>
+                        <input type="radio" name="question13" value="No"> No
+                    </div>
+                    <div>
+                        <input type="radio" name="question13" value="Not Sure"> Not Sure
+                    </div>
+                </div>
+                <div class="question">
+                    <label>14. Do you seek feedback to improve your skills?</label>
+                    <div>
+                        <input type="radio" name="question14" value="Yes" required> Yes
+                    </div>
+                    <div>
+                        <input type="radio" name="question14" value="No"> No
+                    </div>
+                    <div>
+                        <input type="radio" name="question14" value="Not Sure"> Not Sure
+                    </div>
+                </div>
+                <div class="question">
+                    <label>15. Do you have a growth mindset?</label>
+                    <div>
+                        <input type="radio" name="question15" value="Yes" required> Yes
+                    </div>
+                    <div>
+                        <input type="radio" name="question15" value="No"> No
+                    </div>
+                    <div>
+                        <input type="radio" name="question15" value="Not Sure"> Not Sure
+                    </div>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="navigation">
+                    <button type="button" id="prevBtn" onclick="prevQuestion()">Previous</button>
+                    <button type="button" id="nextBtn" onclick="nextQuestion()">Next</button>
+                    <button type="submit" id="submitBtn" class="hidden">Submit</button>
+                </div>
+            </form>
+
+            <!-- Slideshow -->
+            <div id="scoreSlide1" class="slideshow fade-in">
+                <p style="color: #ff5733;">0-5 Yeses: <span style="color: #ffcc00;">You must be more open.Self reflect and you should be ready for coaching soom</span></p>
+            </div>
+            <div id="scoreSlide2" class="slideshow fade-in">
+                <p style="color: #ffcc00;">6-10 Yeses: <span style="color: #ff5733;">Maybe a little longer, but you're nearly there to get the most from coaching!</span></p>
+            </div>
+            <div id="scoreSlide3" class="slideshow fade-in">
+                <p style="color: #28a745;">11-15 Yeses: <span style="color: #ff5733;">When did you want to enroll yourself? You are ready for coaching!</span></p>
+            </div>
+
+            <div id="userScore"></div>
+            <div id="scoreResult"></div>
+            <div id="confirmationMessage">Your response has been submitted successfully!</div>
+        </div>
+
+        <!-- Confetti container -->
+        <div class="confetti" id="confettiContainer"></div>
+    </div>
+
+    <script>
+        let currentQuestion = 1;
+        const totalQuestions = 15; // Updated total questions
+
+        function showQuestion(n) {
+            const questions = document.querySelectorAll('.question');
+            questions.forEach((q, index) => {
+                q.style.display = index === n - 1 ? 'block' : 'none';
+            });
+
+            // Show/hide navigation buttons
+            document.getElementById('prevBtn').style.display = n === 1 ? 'none' : 'block';
+            document.getElementById('nextBtn').style.display = n === totalQuestions ? 'none' : 'block';
+            document.getElementById('submitBtn').style.display = n === totalQuestions ? 'block' : 'none';
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < totalQuestions) {
+                currentQuestion++;
+                showQuestion(currentQuestion);
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 1) {
+                currentQuestion--;
+                showQuestion(currentQuestion);
+            }
+        }
+
+        document.getElementById('questionnaireForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Email validation
+            const emailInput = document.getElementById('email');
+            if (!emailInput.checkValidity()) {
+                alert('Please enter a valid email address.');
+                return; // Stop submission if email is invalid
+            }
+
+            // Calculate the score
+            let score = 0;
+            for (let i = 1; i <= totalQuestions; i++) {
+                const answer = document.querySelector(`input[name="question${i}"]:checked`);
+                if (answer && answer.value === "Yes") {
+                    score++;
+                }
+            }
+
+            // Show score
+            const userScore = document.getElementById('userScore');
+            userScore.innerHTML = `Your score: <span style="color: #ffcc00;">${score}</span> out of ${totalQuestions}`;
+            userScore.style.display = 'block';
+
+            // Show appropriate score slide
+            const scoreSlides = [document.getElementById('scoreSlide1'), document.getElementById('scoreSlide2'), document.getElementById('scoreSlide3')];
+            scoreSlides.forEach(slide => slide.style.display = 'none');
+            if (score <= 5) {
+                scoreSlides[0].style.display = 'block';
+            } else if (score <= 10) {
+                scoreSlides[1].style.display = 'block';
+            } else {
+                scoreSlides[2].style.display = 'block';
+            }
+
+            // Show confirmation message
+            document.getElementById('confirmationMessage').style.display = 'block';
+
+            // Trigger confetti
+            triggerConfetti();
+
+            // Submit the form to Formspree
+            this.submit(); // This will now actually submit to Formspree
+        });
+
+        function triggerConfetti() {
+            const confettiContainer = document.getElementById('confettiContainer');
+            const colors = ['#ff5733', '#ffcc00', '#28a745', '#00aaff', '#ff33aa'];
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti-piece');
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.animationDuration = Math.random() * 2 + 3 + 's';
+                confettiContainer.appendChild(confetti);
+            }
+            setTimeout(() => {
+                confettiContainer.innerHTML = ''; // Clear confetti after a while
+            }, 5000);
+        }
+
+        // Show the first question
+        showQuestion(currentQuestion);
+    </script>
+</body>
+</html>

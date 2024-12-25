@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Partner</title>
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 0;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          height: 100vh;
+          background-image: url('chess.jpg'); 
+          background-repeat: no-repeat;
+          background-size: cover;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8); /* Adjust opacity as needed */
+            z-index: -1;
+            pointer-events: none; /* Allow interaction with content above */
+            color: black;
+        }
+
+        /* Watermark overlay on top of the dark layer */
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /*background-color: rgba(0, 0, 0, 0.57); /* Same opacity as header and content */
+            z-index: -2;
+            pointer-events: none; /* Allow interaction with content above */
+            color: darkgray;
+        }
+
+      p{
+        color:white;
+        text-align: center;
+        width:80%
+      }
+    
+        nav{
+          display: flex;
+          padding: 2% 3%;
+          justify-content: space-between;
+          align-items: center;
+          width: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+
+        nav img {
+          width: 150px;
+        }
+
+        .nav-links {
+          flex: 1;
+          text-align: right;
+        }
+
+        .nav-links ul {
+          display: inline-block;
+        }
+
+        .nav-links ul li {
+          list-style: none;
+          display: inline-block;
+          padding: 4px 7px;
+          position: relative;
+        }
+
+        .nav-links ul li a {
+          color: #fff;
+          text-decoration: none;
+          font-size: 13px;
+        }
+
+        .nav-links ul li::after {
+          content: "";
+          width: 0%;
+          height: 2px;
+          background: #f44336;
+          display: block;
+          margin: auto;
+          transition: width 0.5s ease;
+        }
+
+        .nav-links ul li:hover::after {
+          width: 100%;
+        }
+
+        .header {
+          padding: 20px 40px;
+          text-align: center;
+          color: #fff;
+          border-bottom: 1px solid #444;
+        }
+
+        .header h1 {
+          font-size: 2.8em;
+          margin-bottom: 10px;
+        }
+
+        .header p {
+          font-size: 1.2em;
+          margin-top: 10px;
+          opacity: 0.8;
+        }
+
+        .infographic {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            text-align: center;
+            max-width: 1200px;
+        }
+
+        .icon-container {
+            background-color: ;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            color: white;
+        }
+
+        .icon {
+            font-size: 50px;
+            color: #4CAF50;
+            margin-bottom: 15px;
+        }
+
+        .icon-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .icon-description {
+            font-size: 16px;
+            color: #555;
+        }
+        .dropdown {
+              position: relative;
+            }
+
+            .dropdown-content {
+              display: none;
+              position: absolute;
+              top: 100%;
+              left: 0;
+              background-color: black;
+              border: 1px solid white;
+              z-index: 10;
+              min-width: 200px;
+              text-align: left;
+            }
+
+            .dropdown-content a {
+              display: block;
+              color: white;
+              padding: 10px 15px;
+              text-decoration: none;
+              font-size: 13px;
+            }
+
+            .dropdown-content a:hover {
+              background-color: #f44336;
+              color: white;
+            }
+
+            .dropdown:hover .dropdown-content {
+              display: block;
+            }
+      
+            h2{
+              align-items: center;
+              align-content:center ;
+              color: white;  
+            }
+
+            h3{
+              align-items: center;
+              align-content: center;
+              color: white;  
+            }
+      
+          </style>
+        </head>
+        <body id="body">
+          <section class="header">
+            <nav>
+              <!--<a href="index.html"><img src="Logo.jpg" alt="Logo"></a>-->
+              <div class="nav-links" id="navLinks">
+                <i class="fa fa-times" onclick="hideMenu()"></i>
+                <ul>
+                  <li><a href="index.html">HOME</a></li>
+                  <li><a href="About.html">ABOUT US</a></li>
+                  <li class="dropdown">
+                    <a>SERVICES</a>
+                    <div class="dropdown-content">
+                      <a href="coaching.html">Coaching </a>
+                      <a href="customised_trainig.html">Customised Training</a>
+                      <a href="leadership_development.html">Leadership Development</a>
+                      <a href="business_partnering.html">Business Partnering</a>
+                    </div>
+                  </li>
+                  <li><a href="philanthropy.html">PHILANTHROPY</a></li>
+                  <li><a href="case_studies.html">CLIENT WORK</a></li>
+                  <li><a href="testimonials.html">TESTIMONIALS</a></li>
+                  <li><a href="Contact.html">CONTACT</a></li>
+                  </ul>
+                    </div>
+                    <i class="fa fa-bars" onclick="showMenu()"></i>
+                  </nav>
+
+<h1>Where is your Team of Business Partners ? </h1>
+<p>Order Takers. Advisors or Partners</p>
+</section>
+
+       
+        
+<p style="center">This interventions explores and emphasises the skills, behaviours  and mindset to have a trusted stakeholder relationship through reflection, discussion, experience sharing and contemporary  frameworks .These targeted  programmes are designed to help any business partnering function:</p>
+    <div class="infographic">
+        <div class="icon-container">
+            <div class="icon">♟️</div>
+            <div class="icon-title">Fully understand and occupy the role of a ‘strategic' partner</div>
+            <div class="icon-description">.</div>
+        </div>
+        <div class="icon-container">
+            <div class="icon">🧠</div>
+            <div class="icon-title"> Targets three tangible areas of business partnering Develop the necessary skills , behaviours and mindset for success</div>
+            <div class="icon-description"></div>
+        </div>
+        <div class="icon-container">
+            <div class="icon">👍</div>
+            <div class="icon-title">Excel in their role and deliver difference</div>
+            <div class="icon-description"></div>
+        </div>
+        <div class="icon-container">
+            <div class="icon">📈</div>
+            <div class="icon-title">Create more strategic value to your organisation</div>
+            <div class="icon-description"</div>
+        </div>
+    </div>
+</body>
+</html>

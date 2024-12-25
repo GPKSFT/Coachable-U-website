@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Case Studies</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: black;
+            margin: 0;
+            padding: 0;
+        }
+        
+
+        nav {
+          display: flex;
+          padding: 2% 3%;
+          justify-content: space-between;
+          align-items: center;
+          width: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+
+        nav img {
+          width: 150px;
+        }
+
+        .nav-links {
+          flex: 1;
+          text-align: right;
+        }
+
+        .nav-links ul {
+          display: inline-block;
+        }
+
+        .nav-links ul li {
+          list-style: none;
+          display: inline-block;
+          padding: 4px 7px;
+          position: relative;
+        }
+
+        .nav-links ul li a {
+          color: #fff;
+          text-decoration: none;
+          font-size: 13px;
+        }
+
+        .nav-links ul li::after {
+          content: "";
+          width: 0%;
+          height: 2px;
+          background: #f44336;
+          display: block;
+          margin: auto;
+          transition: width 0.5s ease;
+        }
+
+        .nav-links ul li:hover::after {
+          width: 100%;
+        }
+
+        .fa-bars,
+        .fa-times {
+          color: #fff;
+          font-size: 24px;
+          cursor: pointer;
+          display: none;
+        }
+
+        /* For responsive design (optional, add only if you want mobile support) */
+        @media screen and (max-width: 768px) {
+          .fa-bars {
+            display: block;
+          }
+
+          .nav-links {
+            position: absolute;
+            background: black;
+            height: 100vh;
+            width: 100%;
+            top: 0;
+            right: -100%;
+            text-align: center;
+            transition: all 0.5s ease;
+          }
+
+          .nav-links ul {
+            flex-direction: column;
+            margin-top: 50px;
+          }
+
+          .nav-links ul li {
+            display: block;
+            margin: 10px 0;
+          }
+
+          .fa-times {
+            display: block;
+            position: absolute;
+            top: 20px;
+            right: 30px;
+          }
+        }
+
+        .nav-active {
+          right: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2em;
+            margin-bottom: 20px;
+            color:white;
+        }
+
+        .cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 20px;
+        }
+
+        .card {
+            background-color: silver;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 300px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .card img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 15px;
+        }
+
+        .card-title {
+            font-size: 1.3em;
+            margin: 0 0 10px;
+        }
+
+        .card-description {
+            font-size: 0.9em;
+            color: black;
+        }
+
+        .more-btn {
+            display: block;
+            margin: 15px auto 0;
+            text-align: center;
+            text-decoration: none;
+            font-size: 1em;
+            color: #007BFF;
+            transition: color 0.3s ease;
+        }
+
+        .more-btn:hover {
+            color: #0056b3;
+        }
+
+        .white-text {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+      <!--<a href="index.html"><img src="Logo.jpg" alt="Logo"></a>-->
+      <div class="nav-links" id="navLinks">
+        <i class="fa fa-times" onclick="hideMenu()"></i>
+        <ul>
+          <li><a href="index.html">HOME</a></li>
+          <li><a href="About.html">ABOUT US</a></li>
+          <li><a href="services.html">SERVICES</a></li>
+          <li><a href="philanthropy.html">PHILANTHROPY</a></li>
+          <li><a href="case_studies.html">CLIENT WORK</a></li>
+          <li><a href="testimonials.html">TESTIMONIALS</a></li>
+          <li><a href="Contact.html">CONTACT</a></li>
+          <li><a href="hi.html">CONTACT</a></li>
+          
+        </ul>
+      </div>
+      <i class="fa fa-bars" onclick="showMenu()"></i>
+    </nav>
+
+    <div class="container">
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <h1 class="section-title">Case Studies & Stories</h1>
+        <br>
+        <br>
+        <br>
+        <div class="cards">
+            <div class="card">
+                <img src="rachel.jpg" alt="Case Study Image">
+                <div class="card-content">
+                    <h2 class="card-title">Rachel's Journey: From "Either/Or" to "And" Thinking</h2>
+                    <p class="card-description">Rachel, a senior manager, faced challenges balancing her responsibilities and supporting her team. With coaching, she shifted to an "and" mindset, leading to improved team collaboration and personal growth.</p>
+                    <a href="#" class="more-btn" onclick="showDetails('rachel')">More</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="michael.jpg" alt="Case Study Image">
+                <div class="card-content">
+                    <h2 class="card-title">Michael's Story: Strategic Leadership Skills</h2>
+                    <p class="card-description">Michael struggled to balance operational demands with strategic vision. Through coaching, he developed "zoom in, zoom out" skills to align daily work with long-term goals.</p>
+                    <a href="#" class="more-btn" onclick="showDetails('michael')">More</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="alex.jpg" alt="Case Study Image">
+                <div class="card-content">
+                    <h2 class="card-title">Alex's Transition: From "Me-First" to "Team-First"</h2>
+                    <p class="card-description">Alex, a talented engineer, shifted from focusing on individual success to a collaborative approach, boosting team morale and performance.</p>
+                    <a href="#" class="more-btn" onclick="showDetails('alex')">More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showDetails(caseStudy) {
+            let details = {
+                rachel: `
+                    <div class='white-text'>
+                        <h2>Rachel's Journey</h2>
+                        <p><strong>Background:</strong> Rachel, a senior manager in a fast-paced tech company, faced a constant stream of competing demands in her new role. She believed that if she prioritized her own objectives, she couldn’t support her team effectively—and vice versa. This “either/or” mindset created a feeling of constant tension, as she felt forced to choose between her responsibilities and those of her team. This resulted in frustration, missed opportunities for collaboration, and even burnout among her team members who felt unsupported.</p>
+                        <p><strong>Coaching Process:</strong> In her coaching sessions, Rachel explored the impact of her “either/or” mindset. She realized this belief stemmed from past experiences of burnout and a fear that spending time with her team members would disrupt her own goals. Together, we worked on shifting this perspective to an "and" mindset, where she could support her team and meet her own objectives.</p>
+                        <p>Rachel practiced setting clearer priorities and boundaries, along with proactive time management techniques. She also learned to view her team’s successes as aligned with her own, rather than a trade-off. For example, Rachel began scheduling weekly check-ins with team members, where she could offer support and guidance without feeling her own projects would suffer.</p>
+                        <p><strong>Outcome:</strong> With her new “and” mindset, Rachel found greater flexibility in her role. Her team felt more supported, and she discovered that engaging with their needs often led to innovative solutions that benefited her projects, too. As her approach shifted, so did her team’s performance. The team’s collaboration, and overall engagement improved, ultimately boosting their collective productivity.</p>
+                    </div>
+                `,
+                michael: `
+                    <div class='white-text'>
+                        <h2>Michael's Story</h2>
+                        <p><strong>Background:</strong> Michael, a senior leader in a growing healthcare company, found himself constantly torn between day-to-day operational demands and the need for strategic vision. He often felt stuck in the weeds, responding to immediate issues, which left little time for him to think strategically.</p>
+                        <p><strong>Coaching Process:</strong> In coaching, Michael learned the powerful skill of "zooming in and zooming out" to sharpen his strategic thinking. During sessions, he identified opportunities to take a broad view of industry trends and align his team with long-term goals. He also focused on key projects and metrics within his team that acted as building blocks for larger strategic goals.</p>
+                        <p><strong>Outcome:</strong> By adopting this approach, Michael transformed his leadership style. His decisions became more strategic and proactive, connecting daily work to the company’s long-term vision, ultimately shaping sustainable growth.</p>
+                    </div>
+                `,
+                alex: `
+                    <div class='white-text'>
+                        <h2>Alex's Transition</h2>
+                        <p><strong>Background:</strong> Alex, a talented software engineer, was known for his technical expertise but often overlooked collaboration opportunities. This "me-first" mindset created tension and limited team success.</p>
+                        <p><strong>Coaching Process:</strong> Through coaching, Alex shifted his focus to collective achievement, practicing proactive communication, and sharing expertise to align with team goals.</p>
+                        <p><strong>Outcome:</strong> Alex became a key team player, improving morale and delivering higher-quality results. His collaborative approach was recognized across the organization.</p>
+                    </div>
+                `
+            };
+
+            const container = document.querySelector('.container');
+            container.innerHTML = details[caseStudy] + '<br><a href="case_studies.html" class="more-btn">Back</a>';
+        }
+    </script>
+</body>
+</html>

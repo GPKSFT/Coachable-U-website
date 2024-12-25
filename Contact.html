@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #000, #333);
+      overflow: hidden;
+      animation: backgroundAnimation 10s infinite alternate;
+      color: #fff;
+    }
+
+    @keyframes backgroundAnimation {
+      from {
+        background: linear-gradient(135deg, #000, #333);
+      }
+      to {
+        background: linear-gradient(135deg, #111, #444);
+      }
+    }
+
+    .contact-container {
+      background: #000;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+      width: 90%;
+      max-width: 500px;
+      transform: translateY(100vh);
+      animation: slideIn 1s forwards ease-out;
+    }
+
+    @keyframes slideIn {
+      to {
+        transform: translateY(0);
+      }
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 1rem;
+      animation: fadeIn 1.5s;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    .input-container {
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+
+    .input-container input, .input-container textarea {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-bottom: 2px solid #444;
+      outline: none;
+      background: none;
+      font-size: 1rem;
+      color: #fff;
+    }
+
+    .input-container input::placeholder, .input-container textarea::placeholder {
+      color: transparent;
+    }
+
+    .input-container input:not(:placeholder-shown) + label, 
+    .input-container textarea:not(:placeholder-shown) + label,
+    .input-container input:focus + label,
+    .input-container textarea:focus + label {
+      top: -20px;
+      left: 0;
+      font-size: 0.75rem;
+      color: #fff;
+      transition: 0.3s;
+    }
+
+    .input-container label {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 1rem;
+      color: #888;
+      pointer-events: none;
+      transition: all 0.3s ease;
+    }
+
+    .input-container input:focus ~ .focus-border,
+    .input-container textarea:focus ~ .focus-border {
+      width: 100%;
+      transition: 0.4s;
+    }
+
+    .input-container .focus-border {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: #fff;
+      transition: 0.4s;
+    }
+
+    textarea {
+      height: 100px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      background-color: #444;
+      color: white;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    button:hover {
+      background-color: #555;
+      transform: scale(1.05);
+    }
+
+    button:active {
+      transform: scale(1);
+    }
+
+    #response-message {
+      margin-top: 1rem;
+      text-align: center;
+    }
+
+    @keyframes placeholderMove {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    nav {
+      display: flex;
+      padding: 2% 3%;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav img {
+      width: 150px;
+    }
+
+    .nav-links {
+      flex: 1;
+      text-align: right;
+    }
+
+    .nav-links ul li {
+      list-style: none;
+      display: inline-block;
+      padding: 4px 7px;
+      position: relative;
+    }
+
+    .nav-links ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 13px;
+    }
+
+    .nav-links ul li::after {
+      content: "";
+      width: 0%;
+      height: 2px;
+      background: #f44336;
+      display: block;
+      margin: auto;
+      transition: 0.5s;
+    }
+
+    .nav-links ul li:hover::after {
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  
+  <div class="contact-container">
+    <header>
+      <h1>Coachable U</h1>
+    </header>
+    <div class="nav-links" id="navLinks">
+      <i class="fa fa-times" onclick="hideMenu()"></i>
+      <ul>
+        <li><a href="index.html">HOME</a></li>
+        <li><a href="About.html">ABOUT</a></li>
+        <li><a href="Contact.html">CONTACT</a></li>
+        
+      </ul>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <h1>Contact Us</h1>
+    <form id="contact-form">
+      <div class="input-container">
+        <input type="text" id="name" name="name" required>
+        <label for="name" class="input-label">Name</label>
+        <span class="focus-border"></span>
+      </div>
+      <div class="input-container">
+        <input type="email" id="email" name="email" required>
+        <label for="email" class="input-label">Email</label>
+        <span class="focus-border"></span>
+      </div>
+      <div class="input-container">
+        <textarea id="message" name="message" required></textarea>
+        <label for="message" class="input-label">Message</label>
+        <span class="focus-border"></span>
+      </div>
+      <button type="submit" id="submit-btn">Send</button>
+      <p id="response-message"></p>
+    </form>
+  </div>
+  <script>
+    document.getElementById('contact-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      // Basic validation
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const message = document.getElementById('message').value;
+
+      if (name && email && message) {
+        // Simulate form submission
+        setTimeout(() => {
+          document.getElementById('response-message').textContent = "Thank you for your message!";
+          document.getElementById('response-message').style.color = "white";
+          animateResponseMessage();
+          clearForm();
+        }, 1000);
+      } else {
+        document.getElementById('response-message').textContent = "Please fill out all fields.";
+        document.getElementById('response-message').style.color = "red";
+      }
+    });
+
+    function animateResponseMessage() {
+      const responseMessage = document.getElementById('response-message');
+      responseMessage.style.opacity = 0;
+      responseMessage.style.transform = 'translateY(10px)';
+      setTimeout(() => {
+        responseMessage.style.transition = 'opacity 0.5s, transform 0.5s';
+        responseMessage.style.opacity = 1;
+        responseMessage.style.transform = 'translateY(0)';
+      }, 0);
+    }
+
+    function clearForm() {
+      document.getElementById('contact-form').reset();
+      setTimeout(() => {
+        const labels = document.querySelectorAll('.input-label');
+        labels.forEach(label => label.classList.remove('active'));
+      }, 100);
+    }
+
+    // Adding animation to input fields when not empty
+    document.querySelectorAll('.input-container input, .input-container textarea').forEach((element) => {
+      element.addEventListener('focus', function() {
+        this.nextElementSibling.classList.add('active');
+      });
+      element.addEventListener('blur', function() {
+        if (!this.value) {
+          this.nextElementSibling.classList.remove('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

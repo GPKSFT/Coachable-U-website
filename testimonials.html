@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Map with Reviews</title>
+    <style>
+        /* Full-page background setup */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('people.png'); /* Replace 'people.png' with your image URL */
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            position: relative;
+            color: white;
+        }
+
+        /* Dark overlay */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.67);
+            z-index: -1;
+            pointer-events: none;
+        }
+        nav {
+          display: flex;
+          padding: 2% 3%;
+          justify-content: space-between;
+          align-items: center;
+          width: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+
+        nav img {
+          width: 150px;
+        }
+
+        .nav-links {
+          flex: 1;
+          text-align: right;
+          padding-left: 625px;
+        }
+
+        .nav-links ul {
+          display: flex;
+        }
+
+        .nav-links ul li {
+          list-style: none;
+          padding: 4px 7px;
+          position: relative;
+        }
+
+        .nav-links ul li a {
+          color: #fff;
+          text-decoration: none;
+          font-size: 13px;
+        }
+
+        .nav-links ul li::after {
+          content: "";
+          width: 0%;
+          height: 2px;
+          background: #f44336;
+          display: block;
+          margin: auto;
+          transition: width 0.5s ease;
+        }
+
+        .nav-links ul li:hover::after {
+          width: 100%;
+        }
+
+        .dropdown {
+          position: relative;
+        }
+
+        .dropdown-content {
+          display: none;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          background-color: black;
+          border: 1px solid white;
+          z-index: 10;
+          min-width: 200px;
+          text-align: left;
+        }
+
+        .dropdown-content a {
+          display: block;
+          color: white;
+          padding: 10px 15px;
+          text-decoration: none;
+          font-size: 13px;
+        }
+
+        .dropdown-content a:hover {
+          background-color: #f44336;
+          color: white;
+        }
+
+        .dropdown:hover .dropdown-content {
+          display: block;
+        }
+
+        /* Header styles */
+        .header {
+            display: flex;
+            justify-content: flex-end;
+            padding: 10px 20px;
+            color: white;
+        }
+
+        .header nav ul {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header nav ul li {
+            position: relative;
+        }
+
+        .header nav ul li a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 0.9em;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        /* Hover effect applied to a tag directly */
+        .header nav ul li a::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #f00;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .header nav ul li a:hover::after {
+            transform: scaleX(1);
+        }
+
+        /* Main Content and Map */
+        .content {
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Map Container with a large map image */
+        .map-container {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            background: url('maps.png') no-repeat center; /* Replace 'maps.png' with actual map image */
+            background-size: cover;
+            margin-top: 20px;
+        }
+
+        /* Tooltip box */
+        .tooltip-box {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            width: 250px;
+            display: none;
+            z-index: 1;
+            max-width: 90%;
+            box-sizing: border-box;
+            font-size: 12px;
+        }
+
+        .tooltip-box .arrows {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 5px;
+        }
+
+        /* Red and neon green location markers */
+        .marker {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .red-marker {
+            background-color: red;
+        }
+
+        .neon-green-marker {
+            background-color: blueviolet; /* Neon Green */
+        }
+
+        /* Done Button */
+        .done-button {
+            background-color: #f00;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            margin-top: 10px;
+            display: block;
+            width: 100px;
+            margin: 20px auto;
+        }
+
+        .done-button:hover {
+            background-color: #d00;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .tooltip-box {
+                width: 80%;
+                font-size: 0.6em;
+            }
+
+            .map-container {
+                height: 400px;
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .tooltip-box {
+                width: 90%;
+                font-size: 0.4em;
+            }
+
+            .done-button {
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <section class="header">
+        <nav>
+            <ul>
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="About.html">ABOUT US</a></li>
+                <li><a href="services.html">SERVICES</a></li>
+                <li><a href="philanthropy.html">PHILANTHROPY</a></li>
+                <li><a href="case_studies.html">CASE STUDIES</a></li>
+                <li><a href="testimonials.html">TESTIMONIALS</a></li>
+                <li><a href="Contact.html">CONTACT</a></li>
+            </ul>
+        </nav>
+    </section>
+
+    <!-- Main Content -->
+    <div class="content">
+        <h1>Welcome to Our Page</h1>
+        <p>Explore our global impact by interacting with the map below.</p>
+
+        <!-- Map Container -->
+        <div class="map-container" onmouseover="showTooltip(event)" onmouseout="closeReview()">
+            <!-- Tooltip Box for displaying review -->
+            <div class="tooltip-box" id="tooltip">
+                <p id="countryName">Country</p>
+                <p id="reviewText">Review text will appear here...</p>
+                <div class="arrows">
+                    <span onclick="previousReview()">&#9664;</span>
+                    <span onclick="nextReview()">&#9654;</span>
+                </div>
+                <button class="done-button" onclick="closeReview()">Done</button>
+            </div>
+
+            <!-- Red location markers with feedback from your original code -->
+            <div class="marker red-marker" style="top: 21%; left: 49%;" data-country="Switzerland" data-index="0"></div>
+            <div class="marker red-marker" style="top: 17%; left: 52%;" data-country="Poland" data-index="1"></div>
+            <div class="marker red-marker" style="top: 25%; left: 15%;" data-country="USA" data-index="2"></div>
+            <div class="marker red-marker" style="top: 52%; left: 44.5%;" data-country="Nigeria" data-index="3"></div>
+            <div class="marker red-marker" style="top: 42%; left: 72%;" data-country="India" data-index="4"></div>
+            <div class="marker red-marker" style="top: 15%; left: 46%;" data-country="Scotland" data-index="5"></div>
+            <div class="marker red-marker" style="top: 55%; left: 83.5%;" data-country="Malaysia" data-index="6"></div>
+
+            <!-- Neon green markers -->
+            <div class="marker neon-green-marker" style="top: 25%; left: 16%;" data-country="Hungary" data-index="7"></div>
+            <div class="marker neon-green-marker" style="top: 25%; left: 20%;" data-country="USA" data-index="8"></div>
+            <div class="marker neon-green-marker" style="top: 45%; left: 78%;" data-country="Italy" data-index="9"></div>
+            <div class="marker neon-green-marker" style="top: 65%; left: 28%;" data-country="Azerbaijan" data-index="10"></div>
+            <div class="marker neon-green-marker" style="top: 90%; left: 25%;" data-country="Spain" data-index="11"></div>
+            <div class="marker neon-green-marker" style="top: 15%; left: 20%;" data-country="India" data-index="12"></div>
+            <div class="marker neon-green-marker" style="top: 7%; left: 69%;" data-country="Switzerland" index="14"></div>
+            <div class="marker neon-green-marker" style="top: 40%; left: 60%;" data-country="Turkey" data-index="16"></div>
+            <div class="marker neon-green-marker" style="top: 80%; left: 85%;" data-country="Netherlands" data-index="17"></div>
+            <div class="marker neon-green-marker" style="top: 51%; left: 47%;" data-country="Mexico" 
+data-index="18"></div>
+            <div class="marker neon-green-marker" style="top: 21%; left: 47%;" data-country="Mexico" 
+        </div>
+<data-index="19"></div>
+            <div class="marker neon-green-marker" style="top: 71%; left: 54%;" data-country="Mexico" 
+        </div>
+<data-index="20"></div>
+            <div class="marker neon-green-marker" style="top: 71%; left: 90%;" data-country="Mexico" 
+        </div>
+<data-index="21"></div>
+        <div class="marker neon-green-marker" style="top: 21%; left: 67%;" data-country="Mexico" 
+    </div>
+<data-index="22"></div>
+        <div class="marker neon-green-marker" style="top: 51%; left: 54%;" data-country="Mexico" 
+    </div>
+<data-index="23"></div>
+        <div class="marker neon-green-marker" style="top: 31%; left: 80%;" data-country="Mexico" 
+    </div>
+    </div>
+
+    <script>
+        const markers = document.querySelectorAll('.marker');
+        const tooltip = document.getElementById('tooltip');
+        const countryName = document.getElementById('countryName');
+        const reviewText = document.getElementById('reviewText');
+        let currentReviewIndex = 0;
+
+        const reviews = [
+            { country: 'Switzerland', text: 'The coaching sessions were incredibly valuable. Mr. Sarkar, whom I highly respect, helped me realize my potential which led to me taking on new responsibilities, challenges, and opportunities. This was a turning point in my career as I developed my confidence, felt unstuck, and managed difficult relationships. Thank you. -Head of Immigration, Global Charity' },
+            { country: 'Poland', text: 'Srideep is an amazing coach. He listens carefully, pays attention to every word–and makes me see things with a new perspective. He is very insightful and uses his knowledge not to give answers but to ask deep questions. After the sessions, he sends me frameworks, tools, and other resources to trigger my thinking. These help me personally and professionally. In addition, Srideep is also a wonderful and caring person - which is so important as it gives me comfort to open up, be vulnerable. I trust him completely. - Team Lead, Technology, Fast Moving Consumer Goods' },
+            { country: 'USA', text: 'Srideep’s understanding of me and my context is exceptional. His diverse background has been really helpful. His ability to make otherwise "soft" (vague/visionary) development topics evidence-based, practical, and simple to understand and implement is outstanding. He shared models and frameworks which were never covered in our Leadership programmes. I have reached out to Srideep a few times on short notice because I faced some critical challenges. He made time for me. Srideep’s genuine willingness to support and be with me till the time I create actions which match my work situations makes our coaching relationship invaluable. - Management Consultant, Consulting' },
+            { country: 'Nigeria', text: 'Srideep is an amazing coach with deep insight and experience in leadership and self-awareness. My sessions with him have been explosive and very impactful. If you have Srideep as a coach, you can count yourself privileged. - Project Management Team, Global Charity' },
+            { country: 'India', text: 'I found Srideep’s coaching invaluable, and it made a huge difference. I gained clarity on my goals, sharpened my decision-making, and found greater work-life balance. Srideep also gave me effective feedback which allowed me to refine my communication with others, ultimately improving my ability to lead teams and inspire others. - Senior Manager, Finance & Operations' },
+            { country: 'Scotland', text: 'My coaching experience with Srideep was enlightening. He guided me through my development challenges with compassion and focused listening. His insights into how to approach people, along with solid feedback and actionable goals, made a major impact on my career trajectory. - Senior Executive, Energy Sector' },
+            { country: 'Malaysia', text: 'The work I’ve done with Srideep has been life-changing. As someone who is always looking for ways to improve, he provided me with tools to organize my thoughts and identify strengths I didn’t know I had. His approach is thoughtful and strategic, and I am forever grateful for the work we did together. - Director, Education and Training' },
+            
+        ];
+
+        function showTooltip(event) {
+            const target = event.target;
+            if (target.classList.contains('marker')) {
+                currentReviewIndex = parseInt(target.dataset.index);
+                const review = reviews[currentReviewIndex];
+                countryName.textContent = review.country;
+                reviewText.textContent = review.text;
+                tooltip.style.left = `${event.pageX}px`;
+                tooltip.style.top = `${event.pageY}px`;
+                tooltip.style.display = 'block';
+            }
+        }
+
+        function closeReview() {
+            tooltip.style.display = 'none';
+        }
+
+        function nextReview() {
+            currentReviewIndex = (currentReviewIndex + 1) % reviews.length;
+            updateTooltip();
+        }
+
+        function previousReview() {
+            currentReviewIndex = (currentReviewIndex - 1 + reviews.length) % reviews.length;
+            updateTooltip();
+        }
+
+        function updateTooltip() {
+            const review = reviews[currentReviewIndex];
+            countryName.textContent = review.country;
+            reviewText.textContent = review.text;
+        }
+    </script>
+</body>
+</html>

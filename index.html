@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coachable U</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      box-sizing: border-box;
+    }
+
+    h1{
+      align-self: center;
+    }
+
+    body {
+      background-color: black;
+      color: white;
+    }
+
+    .header {
+      min-height: 100vh;
+      width: 100%;
+      background-color: black;
+      background-position: center;
+      background-size: cover;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    nav {
+      display: flex;
+      padding: 2% 3%;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    nav img {
+      width: 150px;
+    }
+
+    .nav-links {
+      flex: 1;
+      text-align: right;
+      padding-left: 625px;
+    }
+
+    .nav-links ul {
+      display: flex;
+    }
+
+    .nav-links ul li {
+      list-style: none;
+      padding: 4px 7px;
+      position: relative;
+    }
+
+    .nav-links ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 13px;
+    }
+
+    .nav-links ul li::after {
+      content: "";
+      width: 0%;
+      height: 2px;
+      background: #f44336;
+      display: block;
+      margin: auto;
+      transition: width 0.5s ease;
+    }
+
+    .nav-links ul li:hover::after {
+      width: 100%;
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: black;
+      border: 1px solid white;
+      z-index: 10;
+      min-width: 200px;
+      text-align: left;
+    }
+
+    .dropdown-content a {
+      display: block;
+      color: white;
+      padding: 10px 15px;
+      text-decoration: none;
+      font-size: 13px;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #f44336;
+      color: white;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .fa-bars {
+      display: none;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .fa-times {
+      display: none;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .nav-links.responsive ul {
+      display: block;
+      background-color: red;
+      position: absolute;
+      right: 0;
+      top: 50px;
+      width: 100%;
+      text-align: center;
+      z-index: 10;
+    }
+
+    .nav-links.responsive ul li {
+      display: block;
+      padding: 15px 0;
+    }
+
+    .header-content {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .text-box {
+      color: orange;
+      text-align: left;
+      flex: 1;
+      padding: 0 20px;
+    }
+
+    .text-box h1 {
+      font-size: 32px;
+    }
+
+    .text-box p {
+      margin: 10px 0 40px;
+      font-size: 17px;
+    }
+
+    .row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .row img {
+      width: 225px;
+      height: 305px;
+      border-radius: 10px;
+      border: 0.5px solid white;
+      cursor: pointer;
+    }
+
+    .info-boxes {
+      width: 97%;
+      margin: auto;
+      display: flex;
+      gap: 20px;
+      padding: 50px 0;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .info-box {
+      background-image: url('IMG_3806.jpeg');
+      color: white;
+      border: 0.5px white solid;
+      padding: 20px;
+      border-radius: 0; /* Square edges */
+      width: 18%;
+      height: 210px;
+      position: relative;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+      transition: transform 0.5s ease, box-shadow 0.5s ease;
+      text-align: center;
+    }
+
+    .info-box:hover {
+      transform: translateY(-15px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    .info-box h3 {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    .info-box p {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    .info-box .info-btn {
+      display: inline-block;
+      background-color: white;
+      color: black;
+      border: 2px solid black;
+      padding: 10px 20px;
+      text-transform: uppercase;
+      text-decoration: none;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.3s, color 0.3s, transform 0.3s;
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 150px;
+    }
+
+    .info-box .info-btn:hover {
+      background-color: black;
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    .work h1{
+      
+    }
+
+    .sample-cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      column-gap: 1.9em;
+      width: 90%;
+      margin: auto;
+      background-color: black;
+      border: 0.5px white solid ;
+    }
+
+    .sample-cards .card {
+      background: black;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border-right: 0.5px white solid;
+      overflow: hidden;
+      color: white;
+    }
+
+    .sample-cards .card img {
+      width: 100%;
+      height: 70%;
+      margin-bottom: 20px;
+    }
+
+    .button-container {
+      text-align: center;
+      margin: 50px 0;
+    }
+
+    .book-now-btn {
+      display: inline-block;
+      background-color: black;
+      color: white;
+      border: 2px solid white;
+      padding: 15px 30px;
+      font-size: 18px;
+      text-transform: uppercase;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.3s, color 0.3s, transform 0.3s;
+    }
+
+    .book-now-btn:hover {
+      color: black;
+      background-color: white;
+      transform: scale(1.05);
+      border-color: black;
+    }
+
+    @media (max-width: 1200px) {
+      .sample-cards {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .info-box {
+        width: 30%;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .sample-cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .fa-bars {
+        display: block;
+      }
+
+      .nav-links ul {
+        display: none;
+      }
+
+      .info-box {
+        width: 45%;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .sample-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .info-box {
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+<body id="body">
+  <section class="header">
+    <nav>
+      <!--<a href="index.html"><img src="Logo.jpg" alt="Logo"></a>-->
+      <div class="nav-links" id="navLinks">
+        <i class="fa fa-times" onclick="hideMenu()"></i>
+        <ul>
+          <li><a href="index.html">HOME</a></li>
+          <li><a href="About.html">ABOUT US</a></li>
+          <li class="dropdown">
+            <a>SERVICES</a>
+            <div class="dropdown-content">
+              <a href="coaching.html">Coaching</a>
+              <a href="customised_training.html">Customised Training</a>
+              <a href="leadership_development.html">Leadership Development</a>
+              <a href="business_partnering.html">Business Partnering</a>
+            </div>
+          </li>
+          <li><a href="philanthropy.html">PHILANTHROPY</a></li>
+          <li><a href="case_studies.html">CLIENT WORK</a></li>
+          <li><a href="testimonials.html">TESTIMONIALS</a></li>
+          <li><a href="case_studies.html">CASE STUDIES</a></li>
+          <li><a href="Contact.html">CONTACT</a></li>
+        </ul>
+      </div>
+      <i class="fa fa-bars" onclick="showMenu()"></i>
+    </nav>
+    <div class="header-content">
+      <div class="text-box">
+        <h1>Bring Your "A" Game</h1>
+        <p><i>Developing leaders for today and tomorrow</i></p>
+      </div>
+      <div class="row">
+        <img src="Face__2_-removebg-preview.png" alt="Face">
+        <img src="Face__3_-removebg-preview.png" alt="Face">
+        <img src="Face__4_-removebg-preview.png" alt="Face">
+        <img src="Face-removebg-preview.png" alt="Face">
+      </div>
+    </div>
+  </section>
+
+  <section class="info-boxes">
+    <div class="info-box">
+      <h3>Do You Really Need to Change?</h3>
+      <p><i>Standing still is the fastest way of moving backwards...</i></p>
+      <a href="change.html" class="info-btn">Learn More</a>
+    </div>
+    <div class="info-box">
+      <h3>Is Coaching for You?</h3>
+      <p><i>Find out for yourself...</i></p>
+      <a href="Questionnaire.html" class="info-btn">Learn More</a>
+    </div>
+    <div class="info-box">
+      <h3>Why Change is Difficult?</h3>
+      <p><i>People can change that doesn't mean that they will...</i></p>
+      <a href="difficult.html" class="info-btn">Learn More</a>
+    </div>
+    <div class="info-box">
+      <h3>Does Coaching Really Help?</h3>
+      <p><i>A coach can help you see what you haven’t seen before...</i></p>
+      <a href="help.html" class="info-btn">Learn More</a>
+    </div>
+    <div class="info-box">
+      <h3>Leadership Development in Organisations....why? </h3>
+      <p><i> The number are alarming.</i></p>
+      <a href="stats.html" class="info-btn">Learn More</a>
+    </div>
+  </section>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <section class="work">
+    <h1 align="center">Getting you ready for today and tomorrow</h1>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="sample-cards">
+      <div class="card">
+        <img src="group.jpg" alt="Group">
+        <p>Coached members from 26 countries, 13 sectors, and 16 functions.</p>
+      </div>
+      <div class="card">
+        <img src="this-removebg-preview.png" alt="This">
+        <p>Guaranteed and measurable results.</p>
+      </div>
+      <div class="card">
+        <img src="Partnership.jpg" alt="Coaching">
+        <p>Partner with global leadership development organizations.</p>
+      </div>
+      <div class="card">
+        <img src="personalised.jpg" alt="Face to Face">
+        <p>Hyper-personalized coaching programs.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="button-container">
+    <a href="calendar.html" class="book-now-btn"><span>Book Now</span></a>
+  </div>
+
+  <script>
+    const navLinks = document.getElementById('navLinks');
+    function showMenu() {
+      navLinks.classList.add('responsive');
+    }
+    function hideMenu() {
+      navLinks.classList.remove('responsive');
+    }
+  </script>
+</body>
+</html>

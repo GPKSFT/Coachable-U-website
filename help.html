@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Does Coaching Really Help?</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        /* General Styling */
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            margin-left: 160px; /* Offset for navigation sidebar */
+        }
+        nav {
+          display: flex;
+          padding: 2% 3%;
+          justify-content: space-between;
+          align-items: center;
+          width: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+
+        nav img {
+          width: 150px;
+        }
+
+        .nav-links {
+          flex: 1;
+          text-align: right;
+          padding-left: 625px;
+        }
+
+        .nav-links ul {
+          display: flex;
+        }
+
+        .nav-links ul li {
+          list-style: none;
+          padding: 4px 7px;
+          position: relative;
+        }
+
+        .nav-links ul li a {
+          color: #fff;
+          text-decoration: none;
+          font-size: 13px;
+        }
+
+        .nav-links ul li::after {
+          content: "";
+          width: 0%;
+          height: 2px;
+          background: #f44336;
+          display: block;
+          margin: auto;
+          transition: width 0.5s ease;
+        }
+
+        .nav-links ul li:hover::after {
+          width: 100%;
+        }
+
+        .dropdown {
+          position: relative;
+        }
+
+        .dropdown-content {
+          display: none;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          background-color: black;
+          border: 1px solid white;
+          z-index: 10;
+          min-width: 200px;
+          text-align: left;
+        }
+
+        .dropdown-content a {
+          display: block;
+          color: white;
+          padding: 10px 15px;
+          text-decoration: none;
+          font-size: 13px;
+        }
+
+        .dropdown-content a:hover {
+          background-color: #f44336;
+          color: white;
+        }
+
+        .dropdown:hover .dropdown-content {
+          display: block;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+            font-size: 1.5em;
+            color: #ffd700;
+        }
+
+
+
+        h2 {
+            text-align: center;
+        }
+        /* Sidebar Navigation Buttons */
+        .nav-buttons {
+            position: fixed;
+            top: 80px;
+            left: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .nav-buttons button {
+            background-color: #222;
+            color: #ffd700;
+            border: 2px solid #ffd700;
+            padding: 10px;
+            width: 130px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .nav-buttons button:hover {
+            background-color: #ffd700;
+            color: #000;
+        }
+
+        .section {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #111;
+            color: #ddd;
+        }
+
+        /* Stats Section Styles */
+        .stats {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .stats button {
+            background: none;
+            border: none;
+            color: #ffd700;
+            font-size: 30px;
+            margin-right: 15px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .stats button:hover {
+            transform: scale(1.1);
+        }
+
+        /* Chart Container */
+        .chart-container {
+            width: 90%;
+            margin: 20px auto;
+            background-color: #222;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        /*footer {
+            text-align: center;
+            padding: 10px;
+            font-size: px;
+            background-color: #111;
+            color: #888;*/
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>Does Coaching Really Help?</h1>
+    </header>
+
+    <!-- Sidebar Navigation Buttons -->
+    <div class="nav-buttons">
+        <button onclick="scrollToSection('impact')">Impact of Coaching</button>
+        <button onclick="scrollToSection('graph')">Survey Data</button>
+    </div>
+
+    <!-- Impact Section -->
+    <section id="impact" class="section">
+        <h2>Impact of Coaching</h2>
+        <p>Research highlights the numerous benefits of coaching. Here are some key findings:</p>
+        <div class="stats">
+            <button onclick="window.open('https://www.coachingfederation.org/research/global-coaching-study')">
+                <i class="fas fa-chart-line"></i>
+            </button>
+            <p>80% of people who receive coaching report increased self-confidence (International Coaching Federation, 2023).</p>
+        </div>
+        <div class="stats">
+            <button onclick="window.open('https://positivepsychology.com/life-coaching-statistics/')">
+                <i class="fas fa-users"></i>
+            </button>
+            <p>73% of those coached report improved relationships (Positive Psychology, 2023).</p>
+        </div>
+        <div class="stats">
+            <button onclick="window.open('https://hbr.org/2019/01/the-value-of-coaching')">
+                <i class="fas fa-briefcase"></i>
+            </button>
+            <p>67% of leaders say coaching has improved their decision-making skills (Harvard Business Review, 2019).</p>
+        </div>
+        <div class="stats">
+            <button onclick="window.open('https://www.forbes.com/sites/forbescoachescouncil/2022/01/10/11-coaching-statistics-every-leader-should-know/?sh=20cc15cb5c0a')">
+                <i class="fas fa-smile"></i>
+            </button>
+            <p>79% of individuals who receive coaching report positive improvements in their work-life balance (Forbes Coaches Council, 2022).</p>
+        </div>
+        <p>These statistics emphasize the positive influence coaching can have on both personal and professional levels.</p>
+        <p>Click on the icons to find out more information</p>
+    </section>
+
+    <!-- Chart Section -->
+    <section id="graph" class="section chart-container">
+        <h2>Positive Impact of Coaching:Additional Data Points</h2>
+        <canvas id="coachingChart"></canvas>
+    </section>
+
+    <!-- Footer 
+    <footer>
+        <p>&copy; 2024 Coaching Insights. All rights reserved.</p>
+    </footer>-->
+
+    <!-- Chart.js Script for Graph -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Scroll function for navigation
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Tooltip sources for graph data
+        const tooltipSources = [
+            'Gallup: 72% experience enhanced job performance.',
+            'Deloitte: 69% report increased adaptability.',
+            'ICF: 85% saw personal growth from coaching.',
+            'Forbes: 66% report enhanced leadership skills.',
+            'Harvard Business Review: 74% improved clarity on career goals.'
+        ];
+
+        // Horizontal Bar Chart with Data Different from Impact Section
+        const ctx = document.getElementById('coachingChart').getContext('2d');
+        const coachingChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: [
+                    'Enhanced Job Performance', 
+                    'Adaptability Improvement', 
+                    'Personal Growth', 
+                    'Leadership Skills', 
+                    'Career Goal Clarity'
+                ],
+                datasets: [{
+                    label: 'Positive Response (%)',
+                    data: [72, 69, 85, 66, 74],
+                    backgroundColor: [
+                        'rgba(255, 223, 0, 0.8)',
+                        'rgba(255, 215, 0, 0.8)',
+                        'rgba(255, 204, 0, 0.8)',
+                        'rgba(255, 195, 0, 0.8)',
+                        'rgba(255, 185, 0, 0.8)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 223, 0, 1)',
+                        'rgba(255, 215, 0, 1)',
+                        'rgba(255, 204, 0, 1)',
+                        'rgba(255, 195, 0, 1)',
+                        'rgba(255, 185, 0, 1)',
+                    ],
+                    borderWidth: 1,
+                    barThickness: 30 // Slightly thicker bars
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            afterLabel: function(context) {
+                                return `Source: ${tooltipSources[context.dataIndex]}`;
+                            }
+                        },
+                        backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                        titleColor: '#ffd700',
+                        bodyColor: '#fff'
+                    }
+                },
+                scales: {
+                    x: {
+                        title: { display: true, text: 'Percentage (%)', color: '#ffd700', font: { size: 16 } },
+                        ticks: { color: '#ffd700' },
+                        grid: { color: '#444' }
+                    },
+                    y: {
+                        ticks: { color: '#ffd700' },
+                        grid: { color: '#444' }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

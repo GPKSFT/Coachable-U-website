@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Growth: Embrace Change</title>
+    <style>
+        /* General Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #111;
+            color: #f0f0f0;
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(to right, #222, #333);
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        header h1 {
+            font-size: 2em;
+            color: #ffbb33;
+        }
+
+        /* Navigation Button Styles */
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 20px;
+            gap: 15px;
+        }
+
+        .nav-buttons button {
+            background: #333;
+            color: #ffbb33;
+            border: 1px solid #555;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .nav-buttons button:hover {
+            background: #444;
+            transform: scale(1.05);
+        }
+
+        /* Section Styles */
+        .section, .quiz-section, .stats-section, .interactive-stats {
+            background: #222;
+            color: #ddd;
+            padding: 30px;
+            max-width: 900px;
+            margin: 20px auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .section h2, .quiz-section h2, .stats-section h2 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            color: #ffbb33;
+            text-align: center;
+        }
+
+        .section p, .quiz-section p, .stats-section p {
+            font-size: 1em;
+            margin: 10px 0;
+            color: #ddd;
+        }
+
+        /* Interactive Stats Styles */
+        .interactive-stat {
+            padding: 10px;
+            border-left: 4px solid #ffbb33;
+            margin: 15px 0;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .interactive-stat:hover {
+            transform: scale(1.02);
+        }
+
+        .interactive-stat h3 {
+            color: #ffbb33;
+        }
+
+        /* Image Styles */
+        .section img, .stats-section img {
+            max-width: 300px;
+            border-radius: 8px;
+            margin: 15px;
+        }
+
+        /* Quiz Section Styles */
+        .quiz-section form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .quiz-section form label {
+            margin: 8px 0;
+            font-size: 1em;
+        }
+
+        .quiz-section form input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .quiz-section form .answer-options {
+            display: flex;
+            gap: 20px;
+        }
+
+        .quiz-section form button {
+            background: #333;
+            color: #ffbb33;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            font-size: 1em;
+            margin-top: 15px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .quiz-section form button:hover {
+            background: #444;
+            transform: scale(1.05);
+        }
+
+        /* Footer Styles */
+        footer {
+            background: #222;
+            color: #ffbb33;
+            padding: 15px;
+            text-align: center;
+            border-top: 1px solid #333;
+            font-size: 0.9em;
+        }
+
+        /* Scrollable Section */
+        .scrollable-section {
+            overflow-y: auto;
+            max-height: 400px;
+            padding-right: 10px;
+        }
+
+        /* Graph Styles */
+        .chart-container {
+            width: 80%;
+            margin: auto;
+            padding: 20px 0;
+        }
+
+        /* Result Styles */
+        .result-correct {
+            color: green;
+        }
+
+        .result-incorrect {
+            color: red;
+        }
+
+        .correct-answer {
+            font-style: italic;
+            color: #ffbb33;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.5em;
+            }
+
+            .nav-buttons button {
+                font-size: 0.9em;
+                padding: 8px 15px;
+            }
+
+            .section, .quiz-section, .stats-section, .interactive-stats {
+                padding: 20px;
+            }
+
+            .section img, .stats-section img {
+                max-width: 100%;
+            }
+
+            .chart-container {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-buttons button {
+                font-size: 0.8em;
+                padding: 6px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>Do You Really Need to Change?</h1>
+    </header>
+
+    <!-- Navigation Buttons -->
+    <div class="nav-buttons">
+        <button onclick="scrollToSection('stats-section')">Important Stats</button>
+        <button onclick="scrollToSection('key-considerations')">Key Considerations</button>
+        <button onclick="scrollToSection('understanding-change')">Understanding the Need for Change</button>
+        <button onclick="scrollToSection('stereotype-quiz')">Coaching Quiz</button>
+    </div>
+
+    <!-- Stats Section with Image -->
+    <section id="stats-section" class="stats-section">
+        <div>
+            <h2>Growth Factors Affecting Personal Change</h2>
+            <p>Insights from coaching studies show the impact of mindset, skills, and adaptability on personal growth decisions.</p>
+            <p>Motivation to change, skills gaps, and self-awareness are often the primary indicators for those who benefit most from coaching.</p>
+        </div>
+        <img src="IMG_3814.jpeg" alt="Growth Insights">
+    </section>
+
+    <!-- Interactive Stats Section -->
+    <section id="interactive-stats" class="interactive-stats">
+        <h2>Key Statistics on Workforce and Future Trends</h2>
+        <div class="interactive-stat">
+            <h3>45% of CEOs foresee major changes within 10 years</h3>
+            <p>PwC’s 27th Annual Global CEO Survey reveals that nearly half of CEOs doubt their company's viability if it continues on its current path.</p>
+        </div>
+        <div class="interactive-stat">
+            <h3>60% of CEOs predict a need for reskilling within three years</h3>
+            <p>In the next three years, a majority of CEOs believe most of the workforce will need to learn new skills to remain relevant in the evolving job market.</p>
+        </div>
+        <div class="interactive-stat">
+            <h3>23% of CEOs anticipate a 5% or more reduction in headcount</h3>
+            <p>As automation and economic pressures grow, nearly a quarter of CEOs foresee significant staff reductions in their organizations.</p>
+        </div>
+        <div class="interactive-stat">
+            <h3>Future of Jobs Report 2023: A shift in 23% of jobs</h3>
+            <p>Almost a quarter of jobs will change within five years, with 69 million jobs expected to be created and 83 million eliminated, resulting in a net decrease.</p>
+        </div>
+    </section>
+
+    <!-- Chart.js Interactive Graph -->
+    <div class="chart-container">
+        <canvas id="growthChart"></canvas>
+    </div>
+
+    <!-- Script for Interactive Chart -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const dataPoints = {
+            years: ['2019', '2020', '2021', '2022', '2023', '2024'],
+            openToCoaching: [35, 42, 50, 58, 65, 70],
+            selfAwareness: [20, 30, 45, 50, 60, 68],
+            sources: [
+                "XYZ Research, 2019",
+                "XYZ Research, 2020",
+                "ABC Institute, 2021",
+                "ABC Institute, 2022",
+                "ABC Institute, 2023",
+                "DEF Study, 2024"
+            ]
+        };
+
+        const ctx = document.getElementById('growthChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: dataPoints.years,
+                datasets: [
+                    {
+                        label: 'Open to Coaching',
+                        data: dataPoints.openToCoaching,
+                        backgroundColor: 'rgba(51, 153, 255, 0.2)',
+                        borderColor: '#3399ff',
+                        borderWidth: 2,
+                        fill: true,
+                    },
+                    {
+                        label: 'Self-Awareness Level',
+                        data: dataPoints.selfAwareness,
+                        backgroundColor: 'rgba(255, 153, 51, 0.4)',
+                        borderColor: '#ff9933',
+                        borderWidth: 2,
+                        fill: true,
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return `${context.dataset.label}: ${context.parsed.y}% (Source: ${dataPoints.sources[context.dataIndex]})`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Embrace Change. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript for Smooth Scrolling -->
+    <script>
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

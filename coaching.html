@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Circles</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-image: url('people.jpg'); 
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.81); /* Adjust opacity as needed */
+        z-index: -1;
+        pointer-events: none; /* Allow interaction with content above */
+        color: white;
+    }
+
+    /* Watermark overlay on top of the dark layer */
+    body::after {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        /*background-color: rgba(0, 0, 0, 0.57); /* Same opacity as header and content */
+        z-index: 0;
+        pointer-events: none; /* Allow interaction with content above */
+        color: white;
+    }
+    nav {
+      display: flex;
+      padding: 2% 3%;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    nav img {
+      width: 150px;
+    }
+
+    .nav-links {
+      flex: 1;
+      text-align: right;
+      padding-left: 625px;
+    }
+
+    .nav-links ul {
+      display: flex;
+    }
+
+    .nav-links ul li {
+      list-style: none;
+      padding: 4px 7px;
+      position: relative;
+    }
+
+    .nav-links ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 13px;
+    }
+
+    .nav-links ul li::after {
+      content: "";
+      width: 0%;
+      height: 2px;
+      background: #f44336;
+      display: block;
+      margin: auto;
+      transition: width 0.5s ease;
+    }
+
+    .nav-links ul li:hover::after {
+      width: 100%;
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: black;
+      border: 1px solid white;
+      z-index: 10;
+      min-width: 200px;
+      text-align: left;
+    }
+
+    .dropdown-content a {
+      display: block;
+      color: white;
+      padding: 10px 15px;
+      text-decoration: none;
+      font-size: 13px;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #f44336;
+      color: white;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .circle-container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      transition: all 0.5s ease;
+    }
+
+    .circle {
+      width: 220px;
+      height: 220px;
+      background-color: black;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.5s ease;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+      border: 1px solid silver;
+   
+    }
+
+    .circle:hover {
+      transform: scale(1.1);
+    }
+
+    .circle.active {
+      border: 5px solid silver;
+      transform: translateY(-10px);
+    }
+
+    #info-box {
+      width: auto;
+      margin-top: 30px;
+      padding: 20px;
+      border: 2px solid silver;
+      border-radius: 10px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      opacity: 0;
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      transform: translateY(20px);
+      colour:white;
+    }
+
+    #info-box.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .content {
+      font-size: 16px;
+      line-height: 1.5;
+      color: white;
+    }
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: black;
+      border: 1px solid white;
+      z-index: 10;
+      min-width: 200px;
+      text-align: left;
+    }
+
+    .dropdown-content a {
+      display: block;
+      color: white;
+      padding: 10px 15px;
+      text-decoration: none;
+      font-size: 13px;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #f44336;
+      color: white;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="circle-container">
+    <div class="circle" data-series="individual-impact">
+      <h3>Individual Impact</h3>
+      <p>Individual Contributors</p>
+    </div>
+    <div class="circle" data-series="team-transformation">
+      <h3>Team Transformation</h3>
+      <p>Team </p>
+    </div>
+    <div class="circle" data-series="leadership-labs">
+      <h3>Leadership Labs</h3>
+      <p>Leaders/Managers</p>
+    </div>
+    <div class="circle" data-series="change-makers">
+      <h3>Change Makers</h3>
+      <p>High Potentials</p>
+    </div>
+  </div>
+
+  <div id="info-box">
+    <div class="content"></div>
+  </div>
+
+  <script>
+    // Mapping "Who are you?" content to series
+    const contentMapping = {
+      "individual-impact": `
+        <strong>Who are you?</strong>
+        <ul>
+          <li>Have you recently joined a new organization?</li>
+          <li>Have you moved into a new role?</li>
+          <li>Are you dealing with relationship challenges?</li>
+          <li>Are you not sure what is holding you back?</li>
+          <li>Are you looking at enhancing your confidence?</li>
+          <li>Do you need to reset your work life balance?</li>
+          <li>Do you want to multiply your impact at work and life?</li>
+          <li>Are you happy with where you are?</li>
+          <li>Is your communication or presentation letting you down?</li>
+        </ul>
+      `,
+      "team-transformation": `
+        <strong>Who are you?</strong>
+        <ul>
+          <li>Does your team lack purpose?</li>
+          <li>Does your team not collaborate?</li>
+          <li>Does your team experience conflict?</li>
+          <li>Are your team members not aligned?</li>
+          <li>Do the team members not communicate well enough?</li>
+          <li>Do you inspire others?</li>
+          <li>Are you an inclusive leader?</li>
+          <li>Do you have a clear vision for your team?</li>
+          <li>Do you find it easy to manage politics?</li>
+        </ul>
+      `,
+      "leadership-labs": `
+        <strong>Who are you?</strong>
+        <ul>
+          <li>Are you comfortable with managing change?</li>
+          <li>Are you finding it difficult to manage a dispersed and remote team?</li>
+          <li>Do you still like excessive details?</li>
+        </ul>
+      `,
+      "change-makers": `
+        <strong>Who are you?</strong>
+        <ul>
+          <li>Do you want to get ready for your next level?</li>
+          <li>Do you feel that you are ready to move fast?</li>
+          <li>Do you want to take a stock of yourself?</li>
+          <li>Do you want to address some of your sharp edges?</li>
+          <li>Are some of your strengths becoming weaknesses?</li>
+        </ul>
+      `
+    };
+
+    // JavaScript for circle interactivity
+    const circles = document.querySelectorAll('.circle');
+    const infoBox = document.getElementById('info-box');
+    const contentBox = infoBox.querySelector('.content');
+
+    circles.forEach(circle => {
+      circle.addEventListener('click', () => {
+        // Remove 'active' class from all circles
+        circles.forEach(c => c.classList.remove('active'));
+        // Add 'active' class to clicked circle
+        circle.classList.add('active');
+
+        // Display corresponding content in info box
+        const series = circle.getAttribute('data-series');
+        contentBox.innerHTML = contentMapping[series];
+
+        // Show info box with animation
+        infoBox.classList.add('visible');
+
+        // Adjust circle positions for spread effect
+        document.querySelector('.circle-container').style.justifyContent = 'space-between';
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Corporate Interventions</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-image: url('happy.jpg'); 
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.87); /* Adjust opacity as needed */
+        z-index: -1;
+        pointer-events: none; /* Allow interaction with content above */
+        color: white;
+    }
+
+    /* Watermark overlay on top of the dark layer */
+    body::after {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        /*background-color: rgba(0, 0, 0, 0.57); /* Same opacity as header and content */
+        z-index: 0;
+        pointer-events: none; /* Allow interaction with content above */
+        color: white;
+    }
+
+    
+    nav {
+      display: flex;
+      padding: 2% 3%;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+   
+
+    .nav-links {
+      flex: 1;
+      text-align: right;
+    }
+
+    .nav-links ul {
+      display: inline-block;
+    }
+
+    .nav-links ul li {
+      list-style: none;
+      display: inline-block;
+      padding: 4px 7px;
+      position: relative;
+    }
+
+    .nav-links ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 13px;
+    }
+
+    .nav-links ul li::after {
+      content: "";
+      width: 0%;
+      height: 2px;
+      background: #f44336;
+      display: block;
+      margin: auto;
+      transition: width 0.5s ease;
+    }
+
+    .nav-links ul li:hover::after {
+      width: 100%;
+    }
+
+    .header {
+      padding: 10px 40px;
+      text-align: center;
+      color: #fff;
+      border-bottom: 1px solid grey;
+    }
+
+    .header h1 {
+      font-size: 2.8em;
+      margin-bottom: 10px;
+    }
+
+    .header p {
+      font-size: 1.2em;
+      margin-top: 10px;
+      opacity: 0.8;
+      
+    }
+
+    .content-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .card {
+      background-image: linear-gradient(to right, silver,white,grey);
+      color: #222;
+      padding: 20px;
+      border-radius: 0px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .card h2 {
+      margin: 0 0 10px;
+      font-size: 1.1em;
+    }
+
+    .card p {
+      margin: 0;
+      font-size: 1em;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    .card4{
+
+      border-style: solid;
+      border-color: silver;
+      color: silver;
+      padding: 20px;
+      border-radius: 0px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: black;
+      border: 1px solid white;
+      z-index: 10;
+      min-width: 200px;
+      text-align: left;
+    }
+
+    .dropdown-content a {
+      display: block;
+      color: white;
+      padding: 10px 15px;
+      text-decoration: none;
+      font-size: 13px;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #f44336;
+      color: white;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <!--<a href="index.html"><img src="Logo.jpg" alt="Logo"></a>-->
+    <div class="nav-links" id="navLinks">
+      <i class="fa fa-times" onclick="hideMenu()"></i>
+      <ul>
+        <li><a href="index.html">HOME</a></li>
+        <li><a href="About.html">ABOUT US</a></li>
+        <li><a href="services.html">SERVICES</a></li>
+        <li><a href="philanthropy.html">PHILANTHROPY</a></li>
+        <li><a href="case_studies.html">CLIENT WORK</a></li>
+        <li><a href="testimonials.html">TESTIMONIALS</a></li>
+        <li><a href="Contact.html">CONTACT</a></li>
+  
+  <div class="header">
+    
+    <h1>Customised Corporate Interventions</h1>
+    <p>For Maximum Organizational Impact</p>
+  </div>
+
+  <div class="content-container">
+    <div class="card4">
+      <h2>What We Offer</h2>
+      <p>We work closely with your leadership teams and employees to craft bespoke interventions. Our interventions are designed to deliver measurable results, improve employee engagement, and build long-term resilience.</p>
+    </div>
+    <div class="card">
+      <h2>1. Manager as a Coach – Unlocking Leadership Potential</h2>
+      <p>Empower managers to transition from directive leaders to skilled coaches. This program equips leaders with the tools to ask insightful questions, foster self-reliance in their teams, and inspire personal and professional growth.</p>
+    </div>
+    <div class="card">
+      <h2>2. Conversations That Count – Driving Impact Through Dialogue</h2>
+      <p>Master the art of meaningful and results-driven conversations. Participants will learn techniques to handle tough discussions, provide constructive feedback, and create alignment in any situation.</p>
+    </div>
+    <div class="card">
+      <h2>3. Winning Connections – Building Lasting Relationships</h2>
+      <p>Discover strategies for creating authentic and influential connections. This program focuses on empathy, trust-building, and networking skills essential for lasting professional relationships.</p>
+    </div>
+    <div class="card">
+      <h2>4. Team Mastery – Leading With Purpose and Precision</h2>
+      <p>Develop the skills to manage diverse teams effectively. Topics include setting shared goals, aligning individual strengths, and fostering accountability to achieve exceptional outcomes.</p>
+    </div>
+    <div class="card">
+      <h2>5. Team Synergy – Amplify Collaboration and Results</h2>
+      <p>Learn to cultivate a culture of collaboration and mutual respect. This program helps teams leverage collective strengths, manage conflicts, and achieve shared success.</p>
+    </div>
+    <div class="card">
+      <h2>6. Communication Edge – Speak to Lead, Listen to Win</h2>
+      <p>Sharpen your communication skills to inspire, influence, and inform. Focus areas include clarity, storytelling, active listening, and handling difficult conversations with confidence.</p>
+    </div>
+    <div class="card">
+      <h2>7. Next-Gen Leaders – Empowering Aspiring Managers</h2>
+      <p>Prepare aspiring managers for leadership roles. This program addresses core managerial skills like decision-making, delegation, and team-building, setting participants up for future success.</p>
+    </div>
+    <div class="card">
+      <h2>8. Manager's Playbook – Strategies for Success</h2>
+      <p>A comprehensive guide for managers to excel in their roles. This program covers goal-setting, performance tracking, team dynamics, and proactive problem-solving.</p>
+    </div>
+    <div class="card">
+      <h2>9. Ownership Mindset – Leading With Accountability</h2>
+      <p>Develop a mindset of responsibility and initiative. Participants will learn how to own outcomes, build credibility, and empower teams to do the same.</p>
+    </div>
+    <div class="card">
+      <h2>10. Productivity Engine – Maximizing Time and Impact</h2>
+      <p>Learn proven strategies for managing priorities, optimizing workflows, and staying focused in today’s fast-paced world. A must-have for managers juggling multiple responsibilities.</p>
+    </div>
+    <div class="card">
+      <h2>11. Peak Performance Management – Inspiring Results That Matter</h2>
+      <p>Equip managers with techniques to drive high performance in their teams. This includes goal alignment, motivation strategies, and real-time feedback for sustained success.</p>
+    </div>
+    <div class="card">
+      <h2>12. Delegation Unlocked – Empower, Entrust, Excel</h2>
+      <p>Overcome the barriers to effective delegation. Participants will learn to trust their teams, delegate effectively, and free up time for strategic thinking and leadership.</p>
+    </div>
+    <div class="card">
+      <h2>13. Change Catalyst – Leading Transformation With Confidence</h2>
+      <p>Prepare managers to lead their teams through change with resilience and clarity. This program includes tools for managing resistance and inspiring adaptability.</p>
+    </div>
+    <div class="card">
+      <h2>14. Supervisor's Compass – Guiding Teams to Success</h2>
+      <p>Tailored for supervisors, this program builds foundational skills in leadership, conflict resolution, and performance management to guide their teams with confidence.</p>
+    </div>
+    <div class="card">
+      <h2>15. Ignite Your Star Power – Unleashing the Best in You</h2>
+      <p>A personal growth program designed to help participants discover and amplify their unique strengths, build self-confidence, and shine as leaders in their own right.</p>
+    </div>
+  </div>
+</body>
+</html>

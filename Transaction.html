@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Your Transaction</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #333;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #fff;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #ccc;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="number"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #666;
+            border-radius: 4px;
+            background-color: #222;
+            color: #fff;
+            box-sizing: border-box;
+        }
+
+        #currencyBox {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #666;
+            border-radius: 4px;
+            background-color: #222;
+            color: #fff;
+            box-sizing: border-box;
+        }
+
+        .btn {
+            display: block;
+            width: calc(100% - 22px);
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        nav {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        nav a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #0056b3;
+        }
+
+        #cardContainer {
+            position: relative;
+        }
+
+        #searchCard {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #666;
+            background-color: #222;
+            color: #fff;
+            box-sizing: border-box;
+            border-radius: 4px;
+            margin-bottom: 0;
+        }
+
+        #cardDropdown {
+            width: 100%;
+            background-color: #222;
+            color: #fff;
+            border: 1px solid #666;
+            border-radius: 4px;
+            max-height: 200px;
+            overflow-y: auto;
+            position: absolute;
+            top: 40px;
+            left: 0;
+            z-index: 1;
+            display: none;
+        }
+
+        #cardDropdown div {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #444;
+            background-color: #333;
+            cursor: pointer;
+        }
+
+        #cardDropdown div:hover {
+            background-color: #555;
+        }
+
+        #cardDropdown div img {
+            width: 30px;
+            height: auto;
+            margin-right: 10px;
+        }
+
+        .confirmation {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Complete Your Transaction</h1>
+        <form id="paymentForm">
+            <label for="amount">Amount to Pay:</label>
+            <input type="number" id="amount" name="amount" value="30.00" readonly>
+
+            <div id="currencyBox">
+                <span id="currencyLabel">Currency: </span>
+                <span id="currencyValue">USD</span>
+            </div>
+
+            <label for="email">Your Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="cardType">Select Card Type:</label>
+            <div id="cardContainer">
+                <input type="text" id="searchCard" placeholder="Search for a card type..." autocomplete="off">
+                <div id="cardDropdown">
+                    <!-- The options will be dynamically generated here -->
+                </div>
+            </div>
+
+            <label for="cardNumber">Card Number:</label>
+            <input type="text" id="cardNumber" name="cardNumber" required>
+
+            <label for="expiration">Expiration Date:</label>
+            <input type="text" id="expiration" name="expiration" placeholder="MM/YY" required>
+
+            <label for="cvv">CVV:</label>
+            <input type="text" id="cvv" name="cvv" required>
+
+            <button type="submit" class="btn">Submit Payment</button>
+        </form>
+
+        <div class="confirmation" id="confirmation">
+            <h2>Thank you for your payment!</h2>
+            <p>Your payment was successful. You can now proceed to book.</p>
+        </div>
+    </div>
+
+    <nav>
+        <a href="index.html" class="back-btn">Back to Home</a>
+    </nav>
+
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+        const searchCard = document.getElementById('searchCard');
+        const cardDropdown = document.getElementById('cardDropdown');
+        const currencyValue = document.getElementById('currencyValue');
+
+        const cards = [
+            { name: 'Visa', icon: 'https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg' },
+            { name: 'MasterCard', icon: 'https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg' },
+            { name: 'American Express', icon: 'https://upload.wikimedia.org/wikipedia/commons/3/30/American_Express_logo_%282018%29.svg' },
+            { name: 'Discover', icon: 'https://upload.wikimedia.org/wikipedia/commons/2/26/Discover_Card_logo.svg' },
+            { name: 'JCB', icon: 'https://upload.wikimedia.org/wikipedia/commons/3/3e/JCB_Logo.svg' },
+            { name: 'Diners Club', icon: 'https://upload.wikimedia.org/wikipedia/commons/4/4d/Diners_Club_Logo3.svg' },
+            { name: 'UnionPay', icon: 'https://upload.wikimedia.org/wikipedia/commons/2/2a/UnionPay_logo.svg' },
+            { name: 'PayPal', icon: 'https://upload.wikimedia.org/wikipedia/commons/3/3a/PayPal.svg' },
+            { name: 'Apple Pay', icon: 'https://upload.wikimedia.org/wikipedia/commons/2/2f/Apple_Pay_logo.svg' },
+            { name: 'Google Pay', icon: 'https://upload.wikimedia.org/wikipedia/commons/5/53/Google_Pay_%28GPay%29_Logo_%282018-2020%29.svg' },
+            { name: 'Samsung Pay', icon: 'https://upload.wikimedia.org/wikipedia/commons/e/e2/Samsung_Pay_logo.svg' },
+            { name: 'Amazon Pay', icon: 'https://upload.wikimedia.org/wikipedia/commons/e/eb/Amazon_Pay_logo.svg' },
+            { name: 'Zelle', icon: 'https://upload.wikimedia.org/wikipedia/commons/4/44/Zelle_logo.svg' },
+            { name: 'Square', icon: 'https://upload.wikimedia.org/wikipedia/commons/2/29/Square_Inc._logo.svg' },
+            { name: 'Alipay', icon: 'https://upload.wikimedia.org/wikipedia/commons/9/9a/Alipay_logo.svg' },
+            { name: 'WeChat Pay', icon: 'https://upload.wikimedia.org/wikipedia/commons/0/0b/WeChat_Pay_Logo_%28English%29.svg' },
+            { name: 'Cash App', icon: 'https://upload.wikimedia.org/wikipedia/commons/f/f5/Cash_App_logo.svg' },
+            { name: 'Skrill', icon: 'https://upload.wikimedia.org/wikipedia/commons/3/3a/Skrill-logo.svg' },
+            { name: 'Neteller', icon: 'https://upload.wikimedia.org/wikipedia/commons/4/42/Neteller_logo.svg' },
+            { name: 'Venmo', icon: 'https://upload.wikimedia.org/wikipedia/commons/3/30/Venmo_logo.svg' },
+            { name: 'ICICI Bank', icon: 'https://upload.wikimedia.org/wikipedia/commons/c/c9/ICICI_Bank_Logo.svg' },
+            { name: 'Deutsche Bank', icon: 'https://upload.wikimedia.org/wikipedia/commons/0/00/Deutsche_Bank_logo_without_wordmark.svg' },
+            { name: 'Bank of America', icon: 'https://upload.wikimedia.org/wikipedia/commons/4/4b/Bank_of_America_logo_%282019%29.svg' },
+            { name: 'Chase', icon: 'https://upload.wikimedia.org/wikipedia/commons/6/63/Chase_logo_2007.svg' },
+            { name: 'Wells Fargo', icon: 'https://upload.wikimedia.org/wikipedia/commons/7/79/Wells_Fargo_Logo.svg' },
+            { name: 'HSBC', icon: 'https://upload.wikimedia.org/wikipedia/commons/4/4a/HSBC_logo_%282018%29.svg' },
+            { name: 'Barclays', icon: 'https://upload.wikimedia.org/wikipedia/commons/f/f4/Barclays_logo.svg' },
+            { name: 'Citi', icon: 'https://upload.wikimedia.org/wikipedia/commons/1/1e/Citibank_logo.svg' },
+            { name: 'BNP Paribas', icon: 'https://upload.wikimedia.org/wikipedia/commons/1/1e/BNP_Paribas.svg' },
+            { name: 'Santander', icon: 'https://upload.wikimedia.org/wikipedia/commons/3/3e/Santander_Logo.svg' },
+            { name: 'Lloyds Bank', icon: 'https://upload.wikimedia.org/wikipedia/commons/2/20/Lloyds_Bank.svg' },
+            { name: 'Royal Bank of Canada', icon: 'https://upload.wikimedia.org/wikipedia/en/4/49/Royal_Bank_of_Canada_Logo.svg' },
+            { name: 'ANZ Bank', icon: 'https://upload.wikimedia.org/wikipedia/commons/e/ee/ANZ_logo.svg' },
+            { name: 'Westpac', icon: 'https://upload.wikimedia.org/wikipedia/commons/7/72/Westpac_logo.svg' },
+            { name: 'Commonwealth Bank', icon: 'https://upload.wikimedia.org/wikipedia/commons/4/4b/Commonwealth_Bank_logo.svg' },
+            { name: 'TD Bank', icon: 'https://upload.wikimedia.org/wikipedia/commons/4/4a/TD_Canada_Trust_logo.svg' },
+            { name: 'Scotiabank', icon: 'https://upload.wikimedia.org/wikipedia/commons/8/82/Scotiabank_logo.svg' },
+            { name: 'National Australia Bank', icon: 'https://upload.wikimedia.org/wikipedia/commons/4/47/National_Australia_Bank_Logo.svg' },
+            { name: 'ING Group', icon: 'https://upload.wikimedia.org/wikipedia/commons/8/8a/ING_Group_logo.svg' },
+            { name: 'U.S. Bank', icon: 'https://upload.wikimedia.org/wikipedia/commons/a/a0/U.S._Bank_logo.svg' },
+            { name: 'Capital One', icon: 'https://upload.wikimedia.org/wikipedia/commons/f/f5/Capital_One_Logo.svg' },
+            { name: 'TD Ameritrade', icon: 'https://upload.wikimedia.org/wikipedia/commons/4/41/TD_Ameritrade_logo.svg' },
+            { name: 'Robinhood', icon: 'https://upload.wikimedia.org/wikipedia/commons/e/ec/Robinhood_Logo.svg' },
+            { name: 'Fidelity', icon: 'https://upload.wikimedia.org/wikipedia/commons/5/52/Fidelity_Investments_logo.svg' },
+            { name: 'Charles Schwab', icon: 'https://upload.wikimedia.org/wikipedia/commons/f/fc/Charles_Schwab_Corporation_logo.svg' },
+            { name: 'Vanguard', icon: 'https://upload.wikimedia.org/wikipedia/commons/1/1e/Vanguard_logo.svg' },
+            { name: 'Credit Suisse', icon: 'https://upload.wikimedia.org/wikipedia/commons/7/7d/Credit_Suisse_Logo.svg' },
+            { name: 'UBS', icon: 'https://upload.wikimedia.org/wikipedia/commons/3/3e/UBS_logo.svg' },
+            { name: 'Goldman Sachs', icon: 'https://upload.wikimedia.org/wikipedia/commons/4/43/Goldman_Sachs_logo.svg' },
+            { name: 'Morgan Stanley', icon: 'https://upload.wikimedia.org/wikipedia/commons/7/73/Morgan_Stanley_logo.svg' },
+            { name: 'American Airlines Credit Card', icon: 'https://upload.wikimedia.org/wikipedia/commons/d/db/American_Airlines_Logo.svg' }
+        ];
+
+        function filterCards() {
+            const query = searchCard.value.toLowerCase();
+            cardDropdown.innerHTML = '';
+
+            const filteredCards = cards.filter(card => card.name.toLowerCase().startsWith(query));
+
+            if (filteredCards.length > 0) {
+                filteredCards.forEach(card => {
+                    const option = document.createElement('div');
+                    option.innerHTML = `<img src="${card.icon}" alt="${card.name}"> ${card.name}`;
+                    option.addEventListener('click', function () {
+                        searchCard.value = card.name;
+                        cardDropdown.style.display = 'none';
+                    });
+                    cardDropdown.appendChild(option);
+                });
+                cardDropdown.style.display = 'block';
+            } else {
+                cardDropdown.style.display = 'none';
+            }
+        }
+
+        searchCard.addEventListener('input', filterCards);
+
+        searchCard.addEventListener('focus', function () {
+            filterCards(); // Show the dropdown when the input is focused
+        });
+
+        document.addEventListener('click', function (event) {
+            if (!searchCard.contains(event.target) && !cardDropdown.contains(event.target)) {
+                cardDropdown.style.display = 'none';
+            }
+        });
+
+        // Geolocation and currency detection
+        function setCurrencyByLocation() {
+            // This is a placeholder. In a real scenario, you might use an API to get the user's location and currency.
+            // For this example, we'll assume USD by default.
+
+            // You can fetch the user's country and set the currency based on that.
+            fetch('https://ipapi.co/json/')
+                .then(response => response.json())
+                .then(data => {
+                    let currency = 'USD'; // default
+                    switch (data.country_code) {
+                        case 'US':
+                            currency = 'USD';
+                            break;
+                        case 'GB':
+                            currency = 'GBP';
+                            break;
+                        case 'EU':
+                            currency = 'EUR';
+                            break;
+                        // Add more cases as needed for other countries.
+                        default:
+                            currency = 'USD';
+                    }
+                    currencyValue.textContent = currency;
+                })
+                .catch(() => {
+                    currencyValue.textContent = 'USD'; // fallback
+                });
+        }
+
+        setCurrencyByLocation();
+
+        // Form submission
+        const stripe = Stripe('your_stripe_publishable_key_here'); // Replace with your actual publishable key
+        const paymentForm = document.getElementById('paymentForm');
+        const confirmation = document.getElementById('confirmation');
+
+        paymentForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            // Create Stripe token from card details
+            stripe.createToken('card', {
+                number: document.getElementById('cardNumber').value,
+                exp_month: document.getElementById('expiration').value.split('/')[0],
+                exp_year: document.getElementById('expiration').value.split('/')[1],
+                cvc: document.getElementById('cvv').value
+            }).then(function(result) {
+                if (result.error) {
+                    alert(result.error.message);
+                } else {
+                    // Send the token to your server
+                    // For this example, we'll just show a confirmation message
+                    paymentForm.style.display = 'none';
+                    confirmation.style.display = 'block';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

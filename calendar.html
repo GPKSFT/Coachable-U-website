@@ -1,0 +1,44 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Booking Calendar</title>
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+    <nav>
+      <div class="nav-links" id="navLinks">
+        <i class="fa fa-times" onclick="hideMenu()"></i>
+        <ul>
+          <li><a href="index.html">HOME</a></li>
+          <li><a href="About.html">ABOUT</a></li>
+          <li><a href="Contact.html">CONTACT</a></li>
+        </ul>
+      </div>
+      <i class="fa fa-bars" onclick="showMenu()"></i>
+    </nav>
+    <div class="container">
+        <h1>Booking Calendar</h1>
+        <div id="nameInputSection">
+            <label for="userName">Enter your name:</label>
+            <input type="text" id="userName" placeholder="Your Name"><br><br>
+            <label for="userEmail">Enter your email:</label>
+            <input type="email" id="userEmail" placeholder="Your Email">
+            <button id="nextButton" class="btn">Next</button>
+        </div>
+        <div id="calendarSection" class="hidden">
+            <div id="calendar"></div>
+            <div id="timeSlots" class="hidden">
+                <h2>Available Time Slots</h2>
+                <ul id="timeList"></ul>
+            </div>
+        </div>
+        <div class="button-container">
+            <a href="index.html" class="book-now-btn"><span>Back</span></a>
+        </div>
+    </div>
+    <script src="script2.js"></script>
+</body>
+</html>
+
