@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Corporate Interventions</title>
+  <title>Customised Training</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -78,7 +78,7 @@
     .nav-links ul li a {
       color: #fff;
       text-decoration: none;
-      font-size: 13px;
+      font-size: 14px;
     }
 
     .nav-links ul li::after {
@@ -99,7 +99,7 @@
       padding: 10px 40px;
       text-align: center;
       color: #fff;
-      border-bottom: 1px solid grey;
+      border-bottom: 1px solid red;
     }
 
     .header h1 {
@@ -191,21 +191,43 @@
 </head>
 <body>
   <nav>
-    <!--<a href="index.html"><img src="Logo.jpg" alt="Logo"></a>-->
-    <div class="nav-links" id="navLinks">
-      <i class="fa fa-times" onclick="hideMenu()"></i>
-      <ul>
-        <li><a href="index.html">HOME</a></li>
-        <li><a href="About.html">ABOUT US</a></li>
-        <li><a href="services.html">SERVICES</a></li>
-        <li><a href="philanthropy.html">PHILANTHROPY</a></li>
-        <li><a href="case_studies.html">CLIENT WORK</a></li>
-        <li><a href="testimonials.html">TESTIMONIALS</a></li>
-        <li><a href="Contact.html">CONTACT</a></li>
+    <section class="heading">
+      <nav>
+        <a href="index.html"><img src="logos.png" alt="Logo"></a>
+        <div class="nav-links" id="navLinks">
+          <i class="fa fa-times" onclick="hideMenu()"></i>
+          <ul>
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="About.html">ABOUT US</a></li>
+            <li class="dropdown">
+              <a>SERVICES</a>
+              <div class="dropdown-content">
+                <a href="coaching.html">Coaching</a>
+                <a href="customised_training.html">Customised Training</a>
+                <a href="leadership_development.html">Leadership Development</a>
+                <a href="business_partnering.html">Business Partnering</a>
+              </div>
+            </li>
+            <li><a href="philanthropy.html">PHILANTHROPY</a></li>
+            <li><a href="case_studies.html">CLIENT WORK</a></li>
+            <li><a href="testimonials.html">TESTIMONIALS</a></li>
+            <li><a href="case_studies.html">CASE STORIES</a></li>
+            <li><a href="Contact.html">CONTACT</a></li>
+          </ul>
+        </div>
+        <i class="fa fa-bars" onclick="showMenu()"></i>
+      </nav>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      
+      
   
   <div class="header">
     
-    <h1>Customised Corporate Interventions</h1>
+    <h1>Customised Training</h1>
     <p>For Maximum Organizational Impact</p>
   </div>
 

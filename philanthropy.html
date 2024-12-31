@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Support Causes</title>
+    <title>Philanthropy</title>
     <style>
         /* General page styling */
         body {
@@ -63,7 +63,7 @@
         .nav-links {
           flex: 1;
           text-align: right;
-          padding-left: 625px;
+          padding-left: 460px;
         }
 
         .nav-links ul {
@@ -79,7 +79,7 @@
         .nav-links ul li a {
           color: #fff;
           text-decoration: none;
-          font-size: 13px;
+          font-size: 12px;
         }
 
         .nav-links ul li::after {
@@ -145,7 +145,7 @@
         /* Navigation styling */
         .header nav {
             display: flex;
-            align-items: center;
+            align-items: right;
         }
 
         .header ul {
@@ -191,7 +191,7 @@
             text-align: center;
             font-size: 1.1em;
             margin-bottom: 20px;
-            color: #f9b233;
+            color: white;
         }
 
         /* Content area styling */
@@ -241,15 +241,16 @@
 
         .details {
             display: none;
-            font-size: 0.75em;
-            padding-left: 80px;
+            font-size: 0.9em;
+            padding-left: 10px;
             opacity: 0;
             color: white;
             transition: opacity 0.5s ease;
             animation: slideIn 1s ease forwards;
             border: 1px solid silver;
             border-radius: 10px;
-            text-align: center;
+            text-align: left;
+            line-height:20px;
         }
 
         .logo-item.active {
@@ -334,30 +335,46 @@
 <body>
 
     <!-- Header with Navigation -->
-    <section class="header">
-
-        <nav>
-            <ul>
+    
+        <section class="heading">
+          <nav>
+            <a href="index.html"><img src="logos.png" alt="Logo"></a>
+            <div class="nav-links" id="navLinks">
+              <i class="fa fa-times" onclick="hideMenu()"></i>
+              <ul>
                 <li><a href="index.html">HOME</a></li>
                 <li><a href="About.html">ABOUT US</a></li>
-                <li><a href="services.html">SERVICES</a></li>
+                <li class="dropdown">
+                  <a>SERVICES</a>
+                  <div class="dropdown-content">
+                    <a href="coaching.html">Coaching</a>
+                    <a href="customised_training.html">Customised Training</a>
+                    <a href="leadership_development.html">Leadership Development</a>
+                    <a href="business_partnering.html">Business Partnering</a>
+                  </div>
+                </li>
                 <li><a href="philanthropy.html">PHILANTHROPY</a></li>
-                <li><a href="case_studies.html">CASE STUDIES</a></li>
+                <li><a href="case_studies.html">CLIENT STORIES</a></li>
                 <li><a href="testimonials.html">TESTIMONIALS</a></li>
+                
                 <li><a href="Contact.html">CONTACT</a></li>
-            </ul>
-        </nav>
-    </section>
+              </ul>
+            </div>
+            <i class="fa fa-bars" onclick="showMenu()"></i>
+          </nav>
+          <br>
+          
+          
+          
 
 
     <!-- Main Content -->
     <h1>Our Philanthropy</h1>
-    <br>
-    <br>
-    <br>
+    
+    
     <div class="intro">
         <h2>Let us not miss out on a chance of making a difference.</h2>
-        <h3>I support the following causes and offer my time to the following organizations.</h3>
+        <h3>We support the following organizations.</h3>
     </div>
 
     <div class="logo-container">
@@ -367,7 +384,7 @@
             <div class="award"><img src="award.gif" alt="Award for Refugee Jumpstart Coaching"></div>
             <span class="arrow arrow-between-award-name"><b> > </b></span>
             <div class="details">
-                <p>The Refugee Jumpstart offers coaching, mentoring, and training to recognized refugees who are English-speaking, educated, and career-minded individuals who have been forced to flee their homes and rebuild their lives.It has received the International Coaching Federation's first Global Social Impact Award for its impactful work empowering refugees.</p>
+                <p>The Refugee Jumpstart offers coaching, mentoring, and training to recognized refugees who have been forced to flee their homes.It has received the International Coaching Federation's first Global Social Impact Award.</p>
             </div>
         </div>
 
@@ -377,7 +394,7 @@
             <div class="award"><img src="mil.webp" alt="Award for Migrant Leaders"></div>
             <span class="arrow arrow-between-award-name"><b>></b></span>
             <div class="details">
-                <p>The Migrant Leaders is UK charity inspiring and developing disadvantaged young migrants to broaden horizons, capture opportunities, and unlock their potential to become leaders of the future.</p>
+                <p>The Migrant Leaders is an UK charity inspiring and developing disadvantaged young migrants to broaden horizons, capture opportunities, and unlock their potential to become leaders of the future.</p>
             </div>
         </div>
 
@@ -397,7 +414,7 @@
             <div class="award"><img src="stuff.jpg" alt=""></div>
             <span class="arrow arrow-between-award-name"><b>></b></span>
             <div class="details">
-                <p>The Humanitarian Coaching Network (HCN) was created to enable humanitarian and development organizations to support the well-being and development of their staff, at scale and at nominal cost. Since its inception, The HCN has partnered with over 30 organizations and provided coaching services to over 4000 staff members</p>
+                <p>The Humanitarian Coaching Network was created to enable humanitarian and development organizations to support the well-being and development of their staff, at scale and at nominal cost. Since its inception.</p>
             </div>
         </div>
     </div>

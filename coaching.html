@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Interactive Circles</title>
+  <title>Coaching</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -17,6 +17,8 @@
       background-image: url('people.jpg'); 
       background-repeat: no-repeat;
       background-size: cover;
+      align-content: center;
+      align-items: center;
     }
     body::before {
         content: "";
@@ -25,7 +27,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.81); /* Adjust opacity as needed */
+        background-color: rgba(0, 0, 0, 0.6); /* Adjust opacity as needed */
         z-index: -1;
         pointer-events: none; /* Allow interaction with content above */
         color: white;
@@ -43,6 +45,12 @@
         z-index: 0;
         pointer-events: none; /* Allow interaction with content above */
         color: white;
+    }
+
+    h1{
+      font-size:30px;
+      color:white;
+      padding-left:250px;
     }
     nav {
       display: flex;
@@ -62,7 +70,7 @@
     .nav-links {
       flex: 1;
       text-align: right;
-      padding-left: 625px;
+      padding-left: 800px;
     }
 
     .nav-links ul {
@@ -78,7 +86,7 @@
     .nav-links ul li a {
       color: #fff;
       text-decoration: none;
-      font-size: 13px;
+      font-size: 12px;
     }
 
     .nav-links ul li::after {
@@ -133,6 +141,10 @@
       justify-content: center;
       gap: 20px;
       transition: all 0.5s ease;
+      align-content: center;
+      align-self: center;
+      padding-left: 290px;
+      padding-top: 50px;
     }
 
     .circle {
@@ -150,6 +162,11 @@
       transition: all 0.5s ease;
       box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
       border: 1px solid silver;
+      align-content: center;
+      align-self: center;
+      justify-content: center;
+      justify-items: center;
+      border: 2px solid red;
    
     }
 
@@ -158,7 +175,7 @@
     }
 
     .circle.active {
-      border: 5px solid silver;
+      border: 3px solid white;
       transform: translateY(-10px);
     }
 
@@ -217,24 +234,66 @@
     .dropdown:hover .dropdown-content {
       display: block;
     }
+
+    
   </style>
 </head>
 <body>
+  <nav>
+    <section class="heading">
+      <nav>
+        <a href="index.html"><img src="logos.png" alt="Logo"></a>
+        <div class="nav-links" id="navLinks">
+          <i class="fa fa-times" onclick="hideMenu()"></i>
+          <ul>
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="About.html">ABOUT US</a></li>
+            <li class="dropdown">
+              <a>SERVICES</a>
+              <div class="dropdown-content">
+                <a href="coaching.html">Coaching</a>
+                <a href="customised_training.html">Customised Training</a>
+                <a href="leadership_development.html">Leadership Development</a>
+                <a href="business_partnering.html">Business Partnering</a>
+              </div>
+            </li>
+            <li><a href="philanthropy.html">PHILANTHROPY</a></li>
+            <li><a href="case_studies.html">CLIENT WORK</a></li>
+            <li><a href="testimonials.html">TESTIMONIALS</a></li>
+           
+            <li><a href="Contact.html">CONTACT</a></li>
+          </ul>
+        </div>
+        <i class="fa fa-bars" onclick="showMenu()"></i>
+      </nav>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <div class="header">
+        <h1 align="center">We have four levels of coaching offerings</h1>
+      </div>
+      
   <div class="circle-container">
     <div class="circle" data-series="individual-impact">
-      <h3>Individual Impact</h3>
+      <h3>Accelerators</h3>
+      <p><i>for</i> </p>
       <p>Individual Contributors</p>
     </div>
     <div class="circle" data-series="team-transformation">
       <h3>Team Transformation</h3>
-      <p>Team </p>
+      <p><i>for</i> </p>
+      <p>Teams </p>
     </div>
     <div class="circle" data-series="leadership-labs">
-      <h3>Leadership Labs</h3>
+      <h3>Amplify</h3>
+      <p><i>for</i> </p>
       <p>Leaders/Managers</p>
     </div>
     <div class="circle" data-series="change-makers">
       <h3>Change Makers</h3>
+      <p><i>for</i> </p>
       <p>High Potentials</p>
     </div>
   </div>
@@ -268,15 +327,16 @@
           <li>Does your team experience conflict?</li>
           <li>Are your team members not aligned?</li>
           <li>Do the team members not communicate well enough?</li>
-          <li>Do you inspire others?</li>
-          <li>Are you an inclusive leader?</li>
-          <li>Do you have a clear vision for your team?</li>
-          <li>Do you find it easy to manage politics?</li>
+          
         </ul>
       `,
       "leadership-labs": `
         <strong>Who are you?</strong>
         <ul>
+          <li>Do you inspire others?</li>
+          <li>Are you an inclusive leader?</li>
+          <li>Do you have a clear vision for your team?</li>
+          <li>Do you find it easy to manage politics?</li>
           <li>Are you comfortable with managing change?</li>
           <li>Are you finding it difficult to manage a dispersed and remote team?</li>
           <li>Do you still like excessive details?</li>

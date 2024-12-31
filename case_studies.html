@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Case Studies</title>
+    <title>Case Studies</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -47,7 +47,7 @@
         .nav-links ul li a {
           color: #fff;
           text-decoration: none;
-          font-size: 13px;
+          font-size: 14px;
         }
 
         .nav-links ul li::after {
@@ -62,6 +62,38 @@
 
         .nav-links ul li:hover::after {
           width: 100%;
+        }
+        .dropdown {
+          position: relative;
+        }
+
+        .dropdown-content {
+          display: none;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          background-color: black;
+          border: 1px solid white;
+          z-index: 10;
+          min-width: 200px;
+          text-align: left;
+        }
+
+        .dropdown-content a {
+          display: block;
+          color: white;
+          padding: 10px 15px;
+          text-decoration: none;
+          font-size: 13px;
+        }
+
+        .dropdown-content a:hover {
+          background-color: #f44336;
+          color: white;
+        }
+
+        .dropdown:hover .dropdown-content {
+          display: block;
         }
 
         .fa-bars,
@@ -182,22 +214,65 @@
         .white-text {
             color: white;
         }
+        .contain {
+         display: grid;
+         align-items: center; 
+         grid-template-columns: 1fr 1fr ;
+         column-gap: 5px;
+        }
+        .img {
+            max-width: 10%;
+            max-height:10%;
+            float: left;
+          }
+
+          .text {
+            font-size: 20px;
+            padding-left: 20px;
+            padding-top: 20%;
+            float: left;
+          }
+        .header {
+          padding: 20px 40px;
+          text-align: center;
+          color: #fff;
+          border-bottom: 1px solid red;
+        }
+
+        .header h1 {
+          font-size: 2.8em;
+          margin-bottom: 10px;
+        }
+
+        .header p {
+          font-size: 1.2em;
+          margin-top: 10px;
+          opacity: 0.8;
+        }
     </style>
 </head>
 <body>
     <nav>
-      <!--<a href="index.html"><img src="Logo.jpg" alt="Logo"></a>-->
+      <a href="index.html"><img src="logos.png" alt="Logo"></a>
       <div class="nav-links" id="navLinks">
         <i class="fa fa-times" onclick="hideMenu()"></i>
         <ul>
-          <li><a href="index.html">HOME</a></li>
-          <li><a href="About.html">ABOUT US</a></li>
-          <li><a href="services.html">SERVICES</a></li>
-          <li><a href="philanthropy.html">PHILANTHROPY</a></li>
-          <li><a href="case_studies.html">CLIENT WORK</a></li>
-          <li><a href="testimonials.html">TESTIMONIALS</a></li>
-          <li><a href="Contact.html">CONTACT</a></li>
-          <li><a href="hi.html">CONTACT</a></li>
+            <li><a href="index.html">HOME</a></li>
+              <li><a href="About.html">ABOUT US</a></li>
+              <li class="dropdown">
+                <a>SERVICES</a>
+                <div class="dropdown-content">
+                  <a href="coaching.html">Coaching</a>
+                  <a href="customised_training.html">Customised Training</a>
+                  <a href="leadership_development.html">Leadership Development</a>
+                  <a href="business_partnering.html">Business Partnering</a>
+                </div>
+              </li>
+              <li><a href="philanthropy.html">PHILANTHROPY</a></li>
+              <li><a href="case_studies.html">CLIENT STORIES</a></li>
+              <li><a href="testimonials.html">TESTIMONIALS</a></li>
+
+              <li><a href="Contact.html">CONTACT</a></li>
           
         </ul>
       </div>
@@ -211,10 +286,10 @@
         <br>
         <br>
         <br>
-        <br>
-        <br>
-        <br>
-        <h1 class="section-title">Case Studies & Stories</h1>
+       
+        <div class="header">
+            <h1 class="section-title">Case Studies & Stories</h1>
+        </div>
         <br>
         <br>
         <br>
@@ -230,8 +305,8 @@
             <div class="card">
                 <img src="michael.jpg" alt="Case Study Image">
                 <div class="card-content">
-                    <h2 class="card-title">Michael's Story: Strategic Leadership Skills</h2>
-                    <p class="card-description">Michael struggled to balance operational demands with strategic vision. Through coaching, he developed "zoom in, zoom out" skills to align daily work with long-term goals.</p>
+                    <h2 class="card-title">Abhi's Story: Strategic Leadership Skills</h2>
+                    <p class="card-description">Abhi struggled to balance operational demands with strategic vision. Through coaching, he developed "zoom in, zoom out" skills to align daily work with long-term goals.</p>
                     <a href="#" class="more-btn" onclick="showDetails('michael')">More</a>
                 </div>
             </div>
@@ -251,28 +326,66 @@
             let details = {
                 rachel: `
                     <div class='white-text'>
-                        <h2>Rachel's Journey</h2>
-                        <p><strong>Background:</strong> Rachel, a senior manager in a fast-paced tech company, faced a constant stream of competing demands in her new role. She believed that if she prioritized her own objectives, she couldn’t support her team effectively—and vice versa. This “either/or” mindset created a feeling of constant tension, as she felt forced to choose between her responsibilities and those of her team. This resulted in frustration, missed opportunities for collaboration, and even burnout among her team members who felt unsupported.</p>
-                        <p><strong>Coaching Process:</strong> In her coaching sessions, Rachel explored the impact of her “either/or” mindset. She realized this belief stemmed from past experiences of burnout and a fear that spending time with her team members would disrupt her own goals. Together, we worked on shifting this perspective to an "and" mindset, where she could support her team and meet her own objectives.</p>
-                        <p>Rachel practiced setting clearer priorities and boundaries, along with proactive time management techniques. She also learned to view her team’s successes as aligned with her own, rather than a trade-off. For example, Rachel began scheduling weekly check-ins with team members, where she could offer support and guidance without feeling her own projects would suffer.</p>
-                        <p><strong>Outcome:</strong> With her new “and” mindset, Rachel found greater flexibility in her role. Her team felt more supported, and she discovered that engaging with their needs often led to innovative solutions that benefited her projects, too. As her approach shifted, so did her team’s performance. The team’s collaboration, and overall engagement improved, ultimately boosting their collective productivity.</p>
-                    </div>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                  
+                        <div class="contain">
+                          <div class="image">
+                            <img src="rachel.jpg" alt="Case Study Image">
+                          </div>
+                          <div class="text">
+                            <h2>Rachel's Journey</h2>
+                                <p><strong>Background:</strong> Rachel, a senior manager in a fast-paced tech company, faced a constant stream of competing demands in her new role. She believed that if she prioritized her own objectives, she couldn’t support her team effectively—and vice versa. This “either/or” mindset created a feeling of constant tension, as she felt forced to choose between her responsibilities and those of her team. This resulted in frustration, missed opportunities for collaboration, and even burnout among her team members who felt unsupported.</p>
+                                <p><strong>Coaching Process:</strong> In her coaching sessions, Rachel explored the impact of her “either/or” mindset. She realized this belief stemmed from past experiences of burnout and a fear that spending time with her team members would disrupt her own goals. Together, we worked on shifting this perspective to an "and" mindset, where she could support her team and meet her own objectives.</p>
+                                <p>Rachel practiced setting clearer priorities and boundaries, along with proactive time management techniques. She also learned to view her team’s successes as aligned with her own, rather than a trade-off. For example, Rachel began scheduling weekly check-ins with team members, where she could offer support and guidance without feeling her own projects would suffer.</p>
+                                <p><strong>Outcome:</strong> With her new “and” mindset, Rachel found greater flexibility in her role. Her team felt more supported, and she discovered that engaging with their needs often led to innovative solutions that benefited her projects, too. As her approach shifted, so did her team’s performance. The team’s collaboration, and overall engagement improved, ultimately boosting their collective productivity.</p>
+                            </div>
+                          </div>
+                        </div>
+                    
+                        
+                   
+                    
                 `,
                 michael: `
                     <div class='white-text'>
-                        <h2>Michael's Story</h2>
-                        <p><strong>Background:</strong> Michael, a senior leader in a growing healthcare company, found himself constantly torn between day-to-day operational demands and the need for strategic vision. He often felt stuck in the weeds, responding to immediate issues, which left little time for him to think strategically.</p>
-                        <p><strong>Coaching Process:</strong> In coaching, Michael learned the powerful skill of "zooming in and zooming out" to sharpen his strategic thinking. During sessions, he identified opportunities to take a broad view of industry trends and align his team with long-term goals. He also focused on key projects and metrics within his team that acted as building blocks for larger strategic goals.</p>
-                        <p><strong>Outcome:</strong> By adopting this approach, Michael transformed his leadership style. His decisions became more strategic and proactive, connecting daily work to the company’s long-term vision, ultimately shaping sustainable growth.</p>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                        <div class="contain">
+                              <div class="image">
+                                <img src="michael.jpg" alt="Case Study Image">
+                              </div>
+                              <div class="text">
+                        <h2>Abhi's Story</h2>
+                        <p><strong>Background:</strong> Abhi, a senior leader in a growing healthcare company, found himself constantly torn between day-to-day operational demands and the need for strategic vision. He often felt stuck in the weeds, responding to immediate issues, which left little time for him to think strategically.</p>
+                        <p><strong>Coaching Process:</strong> In coaching, Abhi learned the powerful skill of "zooming in and zooming out" to sharpen his strategic thinking. During sessions, he identified opportunities to take a broad view of industry trends and align his team with long-term goals. He also focused on key projects and metrics within his team that acted as building blocks for larger strategic goals.</p>
+                        <p><strong>Outcome:</strong> By adopting this approach, Abhi transformed his leadership style. His decisions became more strategic and proactive, connecting daily work to the company’s long-term vision, ultimately shaping sustainable growth.</p>
                     </div>
+                </div>
+             </div>
                 `,
                 alex: `
                     <div class='white-text'>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                        <div class="contain">
+                              <div class="image">
+                                <img src="alex.jpg" alt="Case Study Image">
+                              </div>
+                              <div class="text">
                         <h2>Alex's Transition</h2>
                         <p><strong>Background:</strong> Alex, a talented software engineer, was known for his technical expertise but often overlooked collaboration opportunities. This "me-first" mindset created tension and limited team success.</p>
                         <p><strong>Coaching Process:</strong> Through coaching, Alex shifted his focus to collective achievement, practicing proactive communication, and sharing expertise to align with team goals.</p>
                         <p><strong>Outcome:</strong> Alex became a key team player, improving morale and delivering higher-quality results. His collaborative approach was recognized across the organization.</p>
                     </div>
+                </div>
+            </div>
                 `
             };
 

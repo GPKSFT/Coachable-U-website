@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Growth: Embrace Change</title>
+    <title>Why Change is Difficult</title>
     <style>
         /* General Styles */
         * {
@@ -31,33 +31,19 @@
             font-size: 2em;
             color: #ffbb33;
         }
-
-        /* Navigation Button Styles */
-        .nav-buttons {
-            display: flex;
-            justify-content: center;
-            margin: 20px;
-            gap: 15px;
-        }
-
-        .nav-buttons button {
-            background: #333;
-            color: #ffbb33;
-            border: 1px solid #555;
-            border-radius: 5px;
-            padding: 10px 20px;
-            cursor: pointer;
+        
+        .more-btn {
+            display: block;
+            margin: 15px auto 0;
+            text-align: center;
+            text-decoration: none;
             font-size: 1em;
-            transition: background 0.3s ease, transform 0.2s ease;
-        }
-
-        .nav-buttons button:hover {
-            background: #444;
-            transform: scale(1.05);
+            color: #007BFF;
+            transition: color 0.3s ease;
         }
 
         /* Section Styles */
-        .section, .quiz-section, .stats-section {
+        .section {
             background: #222;
             color: #ddd;
             padding: 30px;
@@ -67,14 +53,14 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
 
-        .section h2, .quiz-section h2, .stats-section h2 {
+        .section h2 {
             font-size: 1.8em;
             margin-bottom: 15px;
             color: #ffbb33;
             text-align: center;
         }
 
-        .section p, .quiz-section p, .stats-section p {
+        .section p {
             font-size: 1em;
             margin: 10px 0;
             color: #ddd;
@@ -106,270 +92,96 @@
 
         /* Accordion Content Animation */
         .accordion-content {
-            max-height: 0;
+            max-height: 0px;
             overflow: hidden;
             background: #444;
             color: #ddd;
             font-size: 0.95em;
-            transition: max-height 0.5s ease, opacity 0.5s ease;
-            opacity: 0;
+            transition: max-height 0.5s ease, padding 0.5s ease;
             padding: 0 15px;
             border-radius: 5px;
         }
 
         .accordion.active + .accordion-content {
-            max-height: 200px;
-            opacity: 1;
+            min-height: 60px;
             padding: 15px;
         }
 
-        /* Fade-in Animation for Content */
-        .accordion-content p {
-            animation: fadeIn 0.7s ease-in;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Growth Factors Styles */
-        .growth-factors {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.7s ease-in, transform 0.7s ease-in;
-            padding: 15px;
-            border-radius: 5px;
-            background: #333;
-        }
-
-        .growth-factors.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .interactive-item {
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 5px;
-            background: #444;
-            transition: background 0.3s ease, transform 0.3s ease;
-        }
-
-        .interactive-item:hover {
-            background: #555;
-            transform: scale(1.02);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Image Styles */
-        .section img, .stats-section img {
-            max-width: 300px;
-            border-radius: 8px;
-            margin: 15px;
-        }
-
-        /* Chart Styles */
-        .chart-container {
-            width: 80%;
-            margin: auto;
-            padding: 20px 0;
-        }
-
-        /* Scrollable Section */
-        .scrollable-section {
-            overflow-y: auto;
-            max-height: 400px;
-            padding-right: 10px;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 1.5em;
-            }
-
-            .nav-buttons button {
-                font-size: 0.9em;
-                padding: 8px 15px;
-            }
-
-            .chart-container {
-                width: 100%;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .nav-buttons button {
-                font-size: 0.8em;
-                padding: 6px 10px;
-            }
-        }
+        
     </style>
 </head>
 <body>
     <!-- Header -->
     <header>
-        <h1>Do You Really Need to Change?</h1>
+        <h1>Why Change is Difficult?</h1>
     </header>
-
-    <!-- Navigation Buttons -->
-    <div class="nav-buttons">
-        <button onclick="scrollToSection('stats-section')">Important Stats</button>
-        <button onclick="scrollToSection('key-considerations')">Key Considerations</button>
-        <button onclick="scrollToSection('change-process')">Process of Change</button>
-    </div>
-
-    <!-- Key Considerations Section at the Top -->
-    <section id="key-considerations" class="section">
-        <h2>Key Considerations</h2>
-        <p>Assess your current situation and set clear, achievable goals for meaningful change. Evaluate progress regularly and seek support if needed.</p>
-        <img src="https://images.unsplash.com/photo-1496055476441-0a558091d2e8" alt="Key Considerations">
-    </section>
-
-    <!-- Stats Section with More Stats and Facts -->
-    <section id="stats-section" class="stats-section">
-        <div>
-            <h2>Growth Factors Affecting Personal Change</h2>
-            <p class="growth-factors">Insights from coaching studies show the impact of mindset, skills, and adaptability on personal growth decisions.</p>
-            <ul class="scrollable-section growth-factors">
-                <li class="interactive-item">70% of individuals who engage in coaching report significant improvement in self-awareness.</li>
-                <li class="interactive-item">80% of people who work on adaptability experience a 25% boost in resilience to change within one year.</li>
-                <li class="interactive-item">35% of people pursue coaching primarily to develop their career skills, while 45% seek it to increase personal fulfillment.</li>
-                <li class="interactive-item">On average, individuals who pursue consistent personal growth activities improve their happiness by 23% over five years.</li>
-                <li class="interactive-item">Mindset shifts in coaching lead to a 40% greater likelihood of career progression within two years.</li>
-                <li class="interactive-item">People who regularly set and review goals are 42% more likely to achieve a positive outlook on future goals.</li>
-                <li class="interactive-item">90% of people state that self-awareness and emotional intelligence training significantly enhanced their personal relationships.</li>
-            </ul>
-        </div>
-        <img src="IMG_3814.jpeg" alt="Growth Insights">
-    </section>
 
     <!-- Process of Change Section with Accordion -->
     <section id="change-process" class="section">
         <h2>Process of Change is Non-Linear</h2>
-        <p>There are five gaps which stop us from changing. Click each gap below to explore its details:</p>
+        <p>There are five gaps which stop us from changing. Click to know about the gaps </p>
 
         <button class="accordion">Gap 1: Unawareness – Awareness Gap</button>
         <div class="accordion-content">
-            <p>It's impossible to change if you don’t know what to change.</p>
+            <p>It is hard to change if you don’t know what to change.</p>
         </div>
 
         <button class="accordion">Gap 2: Awareness – Experimentation Gap</button>
         <div class="accordion-content">
-            <p>It's impossible to change if you don’t experiment with what you want to change.</p>
+            <p>It is difficult to change if you don’t experiment with what you want to change.</p>
         </div>
 
         <button class="accordion">Gap 3: Experimentation – Reflection Gap</button>
         <div class="accordion-content">
-            <p>It's impossible to change if you don’t reflect on what you learned from experimentation.</p>
+            <p>It is impossible to change if you don’t reflect on what you learned from experimentation.</p>
         </div>
 
-        <button class="accordion">Gap 4: Reflection – Action Gap</button>
+        <button class="accordion">Gap 4: Reflection – Collaboration Gap</button>
         <div class="accordion-content">
-            <p>It's impossible to change if you don’t turn insights from reflection into action.</p>
+            <p>It is hard to change unless you reach out to people for support based  on insights from reflection. </p>
         </div>
 
-        <button class="accordion">Gap 5: Collaboration – Transition Gap</button>
+        <button class="accordion">Gap 5: Collaboration – Action Gap</button>
         <div class="accordion-content">
-            <p>It's impossible to change if you don’t turn collaboration insights into actionable steps.</p>
+            <p>It is difficult to change unless the momentum gained from collaboration  fuels sustainable action.</p>
         </div>
     </section>
+    <br>
+    <br>
+       
+            <a href="index.html" class="more-btn">Back</a>
+    <br>
+    <br>
+       
+    
 
-    <!-- Bar Graph Section -->
-    <section class="chart-container">
-        <h2>Bar Graph of Coaching Impact Statistics</h2>
-        <canvas id="barGraph" width="400" height="200"></canvas>
-    </section>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        // Smooth scrolling function
-        function scrollToSection(sectionId) {
-            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // Initialize the chart
-        const ctx = document.getElementById('barGraph').getContext('2d');
-        const barGraph = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Self-awareness', 'Adaptability', 'Career Skills', 'Personal Fulfillment', 'Happiness', 'Mindset Shifts', 'Goal Setting'],
-                datasets: [{
-                    label: 'Impact (%)',
-                    data: [70, 80, 35, 45, 23, 40, 42],
-                    backgroundColor: [
-                        'rgba(255, 187, 51, 0.6)',
-                        'rgba(255, 187, 51, 0.6)',
-                        'rgba(255, 187, 51, 0.6)',
-                        'rgba(255, 187, 51, 0.6)',
-                        'rgba(255, 187, 51, 0.6)',
-                        'rgba(255, 187, 51, 0.6)',
-                        'rgba(255, 187, 51, 0.6)',
-                    ],
-                    borderColor: [
-                        'rgba(255, 187, 51, 1)',
-                        'rgba(255, 187, 51, 1)',
-                        'rgba(255, 187, 51, 1)',
-                        'rgba(255, 187, 51, 1)',
-                        'rgba(255, 187, 51, 1)',
-                        'rgba(255, 187, 51, 1)',
-                        'rgba(255, 187, 51, 1)',
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        title: {
-                            display: true,
-                            text: 'Impact (%)'
-                        }
-                    }
-                }
-            }
-        });
-
-        // Show growth factors with animation on page load
-        window.onload = function() {
-            const growthFactors = document.querySelectorAll('.growth-factors');
-            growthFactors.forEach((element, index) => {
-                setTimeout(() => {
-                    element.classList.add('visible');
-                }, index * 300); // Stagger the animation
-            });
-        };
-
-        // Accordion functionality
+        // Select all accordion buttons
         const accordions = document.querySelectorAll('.accordion');
-        accordions.forEach(acc => {
-            acc.addEventListener('click', function() {
-                this.classList.toggle('active');
-                const panel = this.nextElementSibling;
-                if (panel.style.maxHeight) {
-                    panel.style.maxHeight = null;
-                } else {
-                    panel.style.maxHeight = panel.scrollHeight + 'px';
-                }
-            });
-        });
 
-        // Interactive Growth Factors
-        const interactiveItems = document.querySelectorAll('.interactive-item');
-        interactiveItems.forEach(item => {
-            item.addEventListener('mouseover', function() {
-                this.style.color = '#ffbb33'; // Change color on hover
-                this.style.fontWeight = 'bold'; // Bold text on hover
-                this.style.transform = 'scale(1.05)'; // Slightly enlarge on hover
-                this.style.transition = 'transform 0.3s ease';
-            });
-            item.addEventListener('mouseout', function() {
-                this.style.color = '#ddd'; // Reset color
-                this.style.fontWeight = 'normal'; // Reset font weight
-                this.style.transform = 'scale(1)'; // Reset size
+        accordions.forEach(accordion => {
+            accordion.addEventListener('click', function () {
+                // Toggle the 'active' class for the clicked accordion
+                this.classList.toggle('active');
+
+                // Select the content panel next to the clicked accordion
+                const content = this.nextElementSibling;
+
+                if (content.style.maxHeight) {
+                    // If content is open, close it
+                    content.style.maxHeight = null;
+                } else {
+                    // Close all open accordions
+                    accordions.forEach(item => {
+                        if (item !== this) {
+                            item.classList.remove('active');
+                            item.nextElementSibling.style.maxHeight = null;
+                        }
+                    });
+
+                    // Open the clicked accordion
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                }
             });
         });
     </script>
