@@ -95,6 +95,10 @@
       width: 100%;
     }
 
+    nav img {
+      width: 150px;
+    }
+
     .header {
       padding: 10px 40px;
       text-align: center;
@@ -297,5 +301,16 @@
       <p>A personal growth program designed to help participants discover and amplify their unique strengths, build self-confidence, and shine as leaders in their own right.</p>
     </div>
   </div>
+  <script>
+    const navLinks = document.getElementById('navLinks');
+  
+    function showMenu() {
+      navLinks.classList.add('show');
+    }
+  
+    function hideMenu() {
+      navLinks.classList.remove('show');
+    }
+  </script>
 </body>
 </html>
