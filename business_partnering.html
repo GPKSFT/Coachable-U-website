@@ -45,11 +45,7 @@
             color: darkgray;
         }
 
-      p{
-        color:white;
-        text-align: center;
-        width:80%
-      }
+      
     
         nav{
           display: flex;
@@ -63,12 +59,13 @@
         }
 
         nav img {
-          width: 150px;
+          width: 125px;
         }
 
         .nav-links {
           flex: 1;
           text-align: right;
+          padding-left: 300px;
         }
 
         .nav-links ul {
@@ -85,7 +82,7 @@
         .nav-links ul li a {
           color: #fff;
           text-decoration: none;
-          font-size: 14px;
+          font-size: 16px;
         }
 
         .nav-links ul li::after {
@@ -101,6 +98,47 @@
         .nav-links ul li:hover::after {
           width: 100%;
         }
+
+        .dropdown {
+              position: relative;
+            }
+
+            .dropdown-content {
+              display: none;
+              position: absolute;
+              top: 100%;
+              left: 0;
+              background-color: black;
+              border: 1px solid white;
+              z-index: 10;
+              min-width: 200px;
+              text-align: left;
+            }
+
+            .dropdown-content a {
+              display: block;
+              color: white;
+              padding: 10px 15px;
+              text-decoration: none;
+              font-size: 13px;
+            }
+
+            .dropdown-content a:hover {
+              background-color: #f44336;
+              color: white;
+            }
+
+            .dropdown:hover .dropdown-content {
+              display: block;
+            }
+
+            p{
+        color:white;
+        text-align: center;
+        width:80%
+      }
+
+        
 
         .header {
           padding: 20px 40px;
@@ -153,38 +191,7 @@
             font-size: 16px;
             color: #555;
         }
-        .dropdown {
-              position: relative;
-            }
-
-            .dropdown-content {
-              display: none;
-              position: absolute;
-              top: 100%;
-              left: 0;
-              background-color: black;
-              border: 1px solid white;
-              z-index: 10;
-              min-width: 200px;
-              text-align: left;
-            }
-
-            .dropdown-content a {
-              display: block;
-              color: white;
-              padding: 10px 15px;
-              text-decoration: none;
-              font-size: 13px;
-            }
-
-            .dropdown-content a:hover {
-              background-color: #f44336;
-              color: white;
-            }
-
-            .dropdown:hover .dropdown-content {
-              display: block;
-            }
+        
       
             h2{
               align-items: center;
@@ -233,7 +240,7 @@
 
        
         
-<p style="center">These interventions explore and emphasise the skills, behaviours  and mindset to have a trusted stakeholder relationship through reflection, discussion, experience sharing and contemporary  frameworks .These targeted  programmes are designed to help any business partnering function:</p>
+<p align="center">These interventions explore and emphasise the skills, behaviours  and mindset to have a trusted stakeholder relationship through reflection, discussion, experience sharing and contemporary  frameworks .These targeted  programmes are designed to help any business partnering function:</p>
     <div class="infographic">
         <div class="icon-container">
             <div class="icon">♟️</div>
@@ -257,4 +264,4 @@
         </div>
     </div>
   </body>
-</html
+</html>
